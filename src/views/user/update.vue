@@ -7,24 +7,23 @@
 				<Step title="Analyze & Review"></Step>
 				<Step title="Submit"></Step>
 			</Steps>
-
 			<div class="step-form" v-if="step == 0">
-				<Form :model="formItem"  label-position="top">
+				<Form ref="formUpdate" :model="formUpdate" :rules="ruleUpdate"   label-position="top">
 					<FormItem>
 						<Row :gutter="20">
 							<Col span="8">
-								<FormItem label="Name">
-									<Input v-model="value" placeholder="Name"></Input>
+								<FormItem label="Name" prop="name">
+                  <Input v-model="formUpdate.name" placeholder="Name"></Input>
+                </FormItem>
+              </Col>
+							<Col span="8">
+								<FormItem label="Email" prop="email">
+									<Input v-model="formUpdate.email" placeholder="Email"></Input>
 								</FormItem>
 							</Col>
 							<Col span="8">
-								<FormItem label="Email">
-									<Input v-model="value" placeholder="Email"></Input>
-								</FormItem>
-							</Col>
-							<Col span="8">
-								<FormItem label="Phone Number">
-									<Input v-model="value" placeholder="Phone Number"></Input>
+								<FormItem label="Phone Number" prop="phoneNumber">
+									<Input v-model="formUpdate.phoneNumber"  placeholder="Phone Number"></Input>
 								</FormItem>
 							</Col>
 						</Row>
@@ -32,36 +31,30 @@
 					<FormItem>
 						<Row :gutter="20">
 							<Col span="8">
-								<FormItem label="Salary Range">
-									<Select v-model="formItem.select">
-										<Option value="beijing">New York</Option>
-										<Option value="shanghai">London</Option>
-										<Option value="shenzhen">Sydney</Option>
+								<FormItem label="Salary Range" prop="salaryRange">
+									<Select v-model="formUpdate.salaryRange">
+										<Option :value="item" :key="index" v-for="(item, index) in selectName.salary_range_name">{{item}}</Option>
 									</Select>
 								</FormItem>
 							</Col>
 							<Col span="8">
-								<FormItem label="Preferred Location">
-									<Select v-model="formItem.select">
-										<Option value="beijing">New York</Option>
-										<Option value="shanghai">London</Option>
-										<Option value="shenzhen">Sydney</Option>
+								<FormItem label="Preferred Location" prop="preferredLocation">
+									<Select v-model="formUpdate.preferredLocation">
+										<Option :value="item" :key="index" v-for="(item, index) in selectName.preferred_location">{{item}}</Option>
 									</Select>
 								</FormItem>
 							</Col>
 							<Col span="8">
-								<FormItem label="Status">
-									<Select v-model="formItem.select">
-										<Option value="beijing">New York</Option>
-										<Option value="shanghai">London</Option>
-										<Option value="shenzhen">Sydney</Option>
+								<FormItem label="Status" prop="status">
+									<Select v-model="formUpdate.status">
+										<Option :value="item" :key="index" v-for="(item, index) in selectName.update_status_name">{{item}}</Option>
 									</Select>
 								</FormItem>
 							</Col>
 						</Row>
 					</FormItem>
 					<FormItem>
-						<CheckboxGroup v-model="social">
+						<CheckboxGroup>
 							<Checkbox>
 								<span>Accept Relocation</span>
 							</Checkbox>
@@ -87,15 +80,15 @@
 						<Row :gutter="20">
 							<Col span="16">
 								<span class="step-desc">
-									<Icon class="icon-form-help" type="help" size="14"></Icon>Why submit your resume to us?  
-									<p class="desc">     
+									<Icon class="icon-form-help" type="help" size="14"></Icon>Why submit your resume to us?
+									<p class="desc">
 										•   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By submitting your resume to us, you create a profile in our database. Our recruiters will come across your resume during their search and offer possible internal referral job opportunities in well-known companies.
 										<br />•   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By submitting your resume to us, you will get a free one time resume enhancement session to help you create a perfect resume and land your dream job.
 									</p>
 								</span>
 							</Col>
 							<Col span="8">
-								<Button class="step-btn" type="primary" shape="circle" size="large">Analyze</Button>
+								<Button @click="handleUpdate" class="step-btn" type="primary" shape="circle" size="large">Analyze</Button>
 							</Col>
 						</Row>
 					</FormItem>
@@ -170,7 +163,8 @@
 												</Col>
 												<Col span="12">
 													<FormItem :cube-input="true" label="Gratuation Year">
-														<Input :clear-btn="true" v-model="value" placeholder="Gratuation Year"></Input>
+														<!-- <Input :clear-btn="true" v-model="value" placeholder="Gratuation Year"></Input> -->
+                            <Input type="birthday" formatView="YYYY" :clear-btn="true" v-model="value" placeholder="YYYY"></Input>
 													</FormItem>
 												</Col>
 											</Row>
@@ -200,8 +194,11 @@
 													</FormItem>
 												</Col>
 												<Col span="12">
-													<FormItem :cube-input="true" label="Length">
-														<Input :clear-btn="true" v-model="value" placeholder="Length"></Input>
+													<FormItem :cube-input="true" >
+                            <Select placeholder="Length">
+                            <Option :value="item" :key="index" v-for="(item, index) in selectName.year_length_name">{{item}}</Option>
+														</Select>
+                            <!-- <Input :clear-btn="true" v-model="value" placeholder="Length"></Input> -->
 													</FormItem>
 												</Col>
 												<Col span="12">
@@ -299,14 +296,20 @@
 							<div class="group-item">
 								<Row :gutter="65">
 									<Col span="8">
-										<FormItem :cube-input="true" label="Salary Range">
-											<Input :clear-btn="true" v-model="value" placeholder="Salary Range"></Input>
+										<FormItem label="Salary Range">
+                      <Select v-model="formUpdate.salaryRange">
+                        <Option :value="item" :key="index" v-for="(item, index) in selectName.salary_range_name">{{item}}</Option>
+                      </Select>
 										</FormItem>
-										<FormItem :cube-input="true" label="Preferred Location">
-											<Input :clear-btn="true" v-model="value" placeholder="Preferred Location"></Input>
+										<FormItem label="Preferred Location">
+                      <Select v-model="formUpdate.preferredLocation">
+                        <Option :value="item" :key="index" v-for="(item, index) in selectName.preferred_location">{{item}}</Option>
+                      </Select>
 										</FormItem>
-										<FormItem :cube-input="true" label="Status">
-											<Input :clear-btn="true" v-model="value" placeholder="Status"></Input>
+										<FormItem label="Status">
+                      <Select v-model="formUpdate.status">
+                        <Option :value="item" :key="index" v-for="(item, index) in selectName.update_status_name">{{item}}</Option>
+                      </Select>
 										</FormItem>
 									</Col>
 									<Col span="8">
@@ -336,8 +339,8 @@
 											<FormItem :cube-input="true" label="Patent Name">
 												<Input :clear-btn="true" v-model="value" placeholder="Patent Name"></Input>
 											</FormItem>
-											<FormItem :cube-input="true" label="MM-DD-YY">
-												<Input :clear-btn="true" v-model="value" placeholder="MM-DD-YY"></Input>
+											<FormItem :cube-input="true" label="YYYY-MM-DD">
+												<Input type="birthday" formatView="YYYY-MM-DD" :clear-btn="true" v-model="value" placeholder="YYYY-MM-DD"></Input>
 											</FormItem>
 										</div>
 									</Col>
@@ -361,8 +364,8 @@
 											<FormItem :cube-input="true" label="Conference / Journal Name">
 												<Input :clear-btn="true" v-model="value" placeholder="Conference / Journal Name"></Input>
 											</FormItem>
-											<FormItem :cube-input="true" label="MM-DD-YY">
-												<Input :clear-btn="true" v-model="value" placeholder="MM-DD-YY"></Input>
+											<FormItem :cube-input="true" label="YYYY-MM-DD">
+												<Input type="birthday" formatView="YYYY-MM-DD" :clear-btn="true" v-model="value" placeholder="YYYY-MM-DD"></Input>
 											</FormItem>
 										</div>
 									</Col>
@@ -386,8 +389,8 @@
 											<FormItem :cube-input="true" label="Name">
 												<Input :clear-btn="true" v-model="value" placeholder="Name"></Input>
 											</FormItem>
-											<FormItem :cube-input="true" label="MM-DD-YY">
-												<Input :clear-btn="true" v-model="value" placeholder="MM-DD-YY"></Input>
+											<FormItem :cube-input="true" label="YYYY-MM-DD">
+												<Input type="birthday" formatView="YYYY-MM-DD" :clear-btn="true" v-model="value" placeholder="YYYY-MM-DD"></Input>
 											</FormItem>
 										</div>
 									</Col>
@@ -417,12 +420,86 @@
 </template>
 
 <script>
+import vueBirthdayInput from 'vue-birthday-input'
+import { selectName } from '@/libs/const'
 export default {
   name: 'home',
-  components: {},
+  components: {
+    vueBirthdayInput
+  },
   data() {
     return {
+      selectName,
       count: ['Algorithms', 'LaTeX', 'Anti-Fraud'],
+
+      formSubmit: {
+
+        attribute: [
+          {
+
+          }
+        ]
+
+
+      },
+
+
+      formUpdate: {
+        name: '',
+        email: '',
+        phoneNumber: '',
+        preferredLocation: '',
+        salaryRange: '',
+        location: '',
+        status: '',
+        travel: ''
+      },
+      ruleUpdate: {
+        name: [
+          {
+            required: true,
+            message: 'The name cannot be empty',
+            trigger: 'blur'
+          }
+        ],
+        email: [
+          {
+            required: true,
+            message: 'Mailbox cannot be empty',
+            trigger: 'blur'
+          },
+          { type: 'email', message: 'Incorrect email format', trigger: 'blur' }
+        ],
+        phoneNumber: [
+          {
+            required: true,
+            message: 'Phone Number cannot be empty',
+            trigger: 'blur'
+          }
+        ],
+        preferredLocation: [
+          {
+            required: true,
+            message: 'Preferred Location cannot be empty',
+            trigger: 'change'
+          }
+        ],
+        salaryRange: [
+          {
+            required: true,
+            message: 'Salary Range cannot be empty',
+            trigger: 'change'
+          }
+        ],
+        status: [
+          {
+            required: true,
+            message: 'Status cannot be empty',
+            trigger: 'change'
+          }
+        ]
+      },
+
       formItem: {
         input: '',
         select: '',
@@ -441,7 +518,34 @@ export default {
       return this.$route.params.step - 1
     }
   },
-  methods: {}
+
+  watch:{
+    'formUpdate.phoneNumber': function (val) {
+      setTimeout(() => {
+        this.formUpdate.phoneNumber = val.replace(/[^\d^\+]/g,'')
+      }, 0)
+    },
+    'formUpdate.name': function (val) {
+      setTimeout(() => {
+        this.formUpdate.name = val.replace(/[\d]/g,'')
+      }, 0)
+    }
+  },
+
+  methods: {
+
+    handleUpdate() {
+      this.$refs.formUpdate.validate((valid) => {
+        if (valid) {
+          this.$router.push({
+            path: '/update/2'
+          })
+        }
+      })
+    }
+
+
+  }
 }
 </script>
 
