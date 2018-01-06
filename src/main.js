@@ -1,6 +1,6 @@
 import babelpolyfill from 'babel-polyfill'
 import Vue from 'vue'
-import App from './App'
+import App from './app'
 
 import iView from '@/iview'
 
@@ -30,7 +30,7 @@ Vue.use(VueResource)
 //NProgress.done();
 //});
 
- 
+
 
 new Vue({
   router,
