@@ -13,17 +13,17 @@
 						<Row :gutter="20">
 							<Col span="8">
 								<FormItem label="Name" prop="name">
-                  <Input v-model="formUpdate.name" placeholder="Name"></Input>
+                  <Input v-model="formUpdate.Name" placeholder="Name"></Input>
                 </FormItem>
               </Col>
 							<Col span="8">
 								<FormItem label="Email" prop="email">
-									<Input v-model="formUpdate.email" placeholder="Email"></Input>
+									<Input v-model="formUpdate.Mail" placeholder="Email"></Input>
 								</FormItem>
 							</Col>
 							<Col span="8">
 								<FormItem label="Phone Number" prop="phoneNumber">
-									<Input v-model="formUpdate.phoneNumber"  placeholder="Phone Number"></Input>
+									<Input v-model="formUpdate.Mobile"  placeholder="Phone Number"></Input>
 								</FormItem>
 							</Col>
 						</Row>
@@ -32,21 +32,21 @@
 						<Row :gutter="20">
 							<Col span="8">
 								<FormItem label="Salary Range" prop="salaryRange">
-									<Select v-model="formUpdate.salaryRange">
+									<Select v-model="formUpdate.SalaryRange">
 										<Option :value="item" :key="index" v-for="(item, index) in selectName.salary_range_name">{{item}}</Option>
 									</Select>
 								</FormItem>
 							</Col>
 							<Col span="8">
 								<FormItem label="Preferred Location" prop="preferredLocation">
-									<Select v-model="formUpdate.preferredLocation">
+									<Select v-model="formUpdate.PreferredLocation">
 										<Option :value="item" :key="index" v-for="(item, index) in selectName.preferred_location">{{item}}</Option>
 									</Select>
 								</FormItem>
 							</Col>
 							<Col span="8">
 								<FormItem label="Status" prop="status">
-									<Select v-model="formUpdate.status">
+									<Select v-model="formUpdate.Status">
 										<Option :value="item" :key="index" v-for="(item, index) in selectName.update_status_name">{{item}}</Option>
 									</Select>
 								</FormItem>
@@ -55,10 +55,10 @@
 					</FormItem>
 					<FormItem>
 						<CheckboxGroup>
-							<Checkbox>
+							<Checkbox v-model="formUpdate.AcceptRelocation">
 								<span>Accept Relocation</span>
 							</Checkbox>
-							<Checkbox>
+							<Checkbox v-model="formUpdate.WillingToTravel">
 								<span>Willing to Travel</span>
 							</Checkbox>
 						</CheckboxGroup>
@@ -67,7 +67,7 @@
 						<Upload
 							multiple
 							type="drag"
-							action="//jsonplaceholder.typicode.com/posts/">
+							:action="updateUrl">
 							<div style="padding: 20px 0">
 								<Icon class="icon-upload" type="wl-upload"></Icon>
 								<p class="desc">Drag and Drop Resume to Upload</p>
@@ -297,17 +297,17 @@
 								<Row :gutter="65">
 									<Col span="8">
 										<FormItem label="Salary Range">
-                      <Select v-model="formUpdate.salaryRange">
+                      <Select  v-model="formUpdate.salaryRange">
                         <Option :value="item" :key="index" v-for="(item, index) in selectName.salary_range_name">{{item}}</Option>
                       </Select>
 										</FormItem>
 										<FormItem label="Preferred Location">
-                      <Select v-model="formUpdate.preferredLocation">
+                      <Select  v-model="formUpdate.preferredLocation">
                         <Option :value="item" :key="index" v-for="(item, index) in selectName.preferred_location">{{item}}</Option>
                       </Select>
 										</FormItem>
 										<FormItem label="Status">
-                      <Select v-model="formUpdate.status">
+                      <Select  v-model="formUpdate.status">
                         <Option :value="item" :key="index" v-for="(item, index) in selectName.update_status_name">{{item}}</Option>
                       </Select>
 										</FormItem>
@@ -422,6 +422,7 @@
 <script>
 import vueBirthdayInput from 'vue-birthday-input'
 import { selectName } from '@/libs/const'
+import { getUpdateUrl, resumeUpload } from '@/libs/api'
 export default {
   name: 'home',
   components: {
@@ -430,39 +431,37 @@ export default {
   data() {
     return {
       selectName,
+      updateUrl: '',
       count: ['Algorithms', 'LaTeX', 'Anti-Fraud'],
 
       formSubmit: {
-
         attribute: [
           {
-
           }
         ]
-
-
       },
-
 
       formUpdate: {
-        name: '',
-        email: '',
-        phoneNumber: '',
-        preferredLocation: '',
-        salaryRange: '',
-        location: '',
-        status: '',
-        travel: ''
+        Name: 'kong fanbo',
+        Mail: 'xank@qq.com',
+        Mobile: '13811112222',
+        SalaryRange: '5000 - 10000',
+        PreferredLocation: 'Shanghai.China',
+        Status: 'Full-time',
+        AcceptRelocation: true,
+        WillingToTravel: false,
+
+        FileId: ''
       },
       ruleUpdate: {
-        name: [
+        Name: [
           {
             required: true,
             message: 'The name cannot be empty',
             trigger: 'blur'
           }
         ],
-        email: [
+        Mail: [
           {
             required: true,
             message: 'Mailbox cannot be empty',
@@ -470,28 +469,28 @@ export default {
           },
           { type: 'email', message: 'Incorrect email format', trigger: 'blur' }
         ],
-        phoneNumber: [
+        Mobile: [
           {
             required: true,
             message: 'Phone Number cannot be empty',
             trigger: 'blur'
           }
         ],
-        preferredLocation: [
+        PreferredLocation: [
           {
             required: true,
             message: 'Preferred Location cannot be empty',
             trigger: 'change'
           }
         ],
-        salaryRange: [
+        SalaryRange: [
           {
             required: true,
             message: 'Salary Range cannot be empty',
             trigger: 'change'
           }
         ],
-        status: [
+        Status: [
           {
             required: true,
             message: 'Status cannot be empty',
@@ -518,7 +517,6 @@ export default {
       return this.$route.params.step - 1
     }
   },
-
   watch:{
     'formUpdate.phoneNumber': function (val) {
       setTimeout(() => {
@@ -531,20 +529,37 @@ export default {
       }, 0)
     }
   },
-
+  created () {
+    getUpdateUrl().then(res => {
+      console.log(res)
+      let {Data} = res.data
+      this.updateUrl = Data.url
+      this.formUpdate.FileId = Data.fileId
+    })
+  },
   methods: {
-
     handleUpdate() {
       this.$refs.formUpdate.validate((valid) => {
         if (valid) {
-          this.$router.push({
-            path: '/update/2'
+          let form = this.formUpdate
+          let salaryRange = form.SalaryRange.split(' - ').map(parseFloat)
+
+          form.SalaryRangeStart = salaryRange[0]
+          form.SalaryRangeEnd = salaryRange[1]
+
+          resumeUpload(form).then(res => {
+            console.log(res)
+            let {Data, ErrCode} = res.data
+            if (ErrCode === 2000) {
+              this.$router.push({
+                path: '/update/2'
+              })
+            }
           })
+          return
         }
       })
     }
-
-
   }
 }
 </script>

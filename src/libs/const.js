@@ -18,7 +18,13 @@ export const selectName = {
     'Just look around'
   ],
   salary_range_name: [
-    'salary'
+    '0 - 5000',
+    '5000 - 10000',
+    '10000 - 15000',
+    '15000 - 20000',
+    '20000 - 30000',
+    '30000 - 40000'
+
   ],
 
   year_length_name: [
