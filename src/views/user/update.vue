@@ -254,8 +254,19 @@
 							</div>
 						</div>
 						<div class="form-group-split">
+
+<FormItem :cube-input="true">
 							 <Tag v-for="item in count" :key="item" :name="item" closable @on-close="handleClose2">{{item}}</Tag>
-  							<Button icon="ios-plus-empty" type="dashed" size="small" @click="handleAdd">Add Tags</Button>
+                <AutoComplete
+                  v-model="newTag"
+                  :data="data1"
+                  @on-search="handleSearch1"
+                  placeholder="Tags"
+                  style="width:200px">
+                </AutoComplete>
+  							<Button icon="ios-plus-empty" type="dashed" size="small" @click="handleAddTags(count)">Add Tags</Button>
+</FormItem>
+
 						</div>
 					</div>
 
@@ -430,16 +441,10 @@ export default {
   },
   data() {
     return {
+      newTag: '',
       selectName,
       updateUrl: '',
       count: ['Algorithms', 'LaTeX', 'Anti-Fraud'],
-
-      formSubmit: {
-        attribute: [
-          {
-          }
-        ]
-      },
 
       formUpdate: {
         Name: 'kong fanbo',
@@ -450,9 +455,9 @@ export default {
         Status: 'Full-time',
         AcceptRelocation: true,
         WillingToTravel: false,
-
         FileId: ''
       },
+      //验证
       ruleUpdate: {
         Name: [
           {
@@ -517,46 +522,60 @@ export default {
       return this.$route.params.step - 1
     }
   },
-  watch:{
-    'formUpdate.phoneNumber': function (val) {
+  watch: {
+    'formUpdate.phoneNumber': function(val) {
       setTimeout(() => {
-        this.formUpdate.phoneNumber = val.replace(/[^\d^\+]/g,'')
+        this.formUpdate.phoneNumber = val.replace(/[^\d^\+]/g, '')
       }, 0)
     },
-    'formUpdate.name': function (val) {
+    'formUpdate.name': function(val) {
       setTimeout(() => {
-        this.formUpdate.name = val.replace(/[\d]/g,'')
+        this.formUpdate.name = val.replace(/[\d]/g, '')
       }, 0)
     }
   },
-  created () {
-    getUpdateUrl().then(res => {
-      console.log(res)
-      let {Data} = res.data
-      this.updateUrl = Data.url
-      this.formUpdate.FileId = Data.fileId
-    })
+  created() {
+    getUpdateUrl().then(
+      res => {
+        let { Data } = res.data
+        this.updateUrl = Data.url
+        this.formUpdate.FileId = Data.fileId
+      },
+      err => {
+        this.$Message.error('Network error')
+      }
+    )
   },
   methods: {
+    handleAddTags(item) {
+      item.push(this.newTag)
+
+    },
     handleUpdate() {
-      this.$refs.formUpdate.validate((valid) => {
+      this.$refs.formUpdate.validate(valid => {
         if (valid) {
           let form = this.formUpdate
           let salaryRange = form.SalaryRange.split(' - ').map(parseFloat)
 
+          this.$Spin.show()
           form.SalaryRangeStart = salaryRange[0]
           form.SalaryRangeEnd = salaryRange[1]
-
-          resumeUpload(form).then(res => {
-            console.log(res)
-            let {Data, ErrCode} = res.data
-            if (ErrCode === 2000) {
-              this.$router.push({
-                path: '/update/2'
-              })
+          resumeUpload(form).then(
+            res => {
+              this.$Spin.hide()
+              let { Data, ErrCode } = res.data
+              if (ErrCode === 2000) {
+                this.$router.push({
+                  path: '/update/2'
+                })
+              }
+            },
+            err => {
+              console.log(err)
+              this.$Spin.hide()
+              this.$Message.error('Network error')
             }
-          })
-          return
+          )
         }
       })
     }
