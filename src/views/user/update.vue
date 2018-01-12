@@ -114,37 +114,45 @@
 						<Row :gutter="65">
 							<Col span="8">
 								<FormItem :cube-input="true" label="Name">
-									<Input :clear-btn="true" v-model="value" placeholder="Name"></Input>
+									<Input v-model="formUpdate.Name" placeholder="Name"></Input>
 								</FormItem>
 							</Col>
 							<Col span="8">
 								<FormItem :cube-input="true" label="Mothertongue">
-									<Input :clear-btn="true" v-model="value" placeholder="Mothertongue"></Input>
+									<Input v-model="formUpdate.Mothertongue" placeholder="Mothertongue"></Input>
 								</FormItem>
 							</Col>
 							<Col span="8">
 								<FormItem :cube-input="true" label="Nationality">
-									<Input :clear-btn="true" v-model="value" placeholder="Nationality"></Input>
+									<Input v-model="formUpdate.Nationality" placeholder="Nationality"></Input>
 								</FormItem>
 							</Col>
 							<Col span="8">
-								<FormItem :cube-input="true" label="Gender">
-									<Input :clear-btn="true" v-model="value" placeholder="Gender"></Input>
+								<FormItem :cube-input="true">
+									<Select v-model="formUpdate.Gender" placeholder="Gender">
+										<Option :value="item" :key="index" v-for="(item, index) in selectName.gender_arr">{{item}}</Option>
+									</Select>
+
 								</FormItem>
 							</Col>
 							<Col span="8">
-								<FormItem :cube-input="true" label="Visa">
-									<Input :clear-btn="true" v-model="value" placeholder="Visa"></Input>
+								<FormItem :cube-input="true"  >
+
+									<Select v-model="formUpdate.Visa" placeholder="Visa">
+										<Option :value="item" :key="index" v-for="(item, index) in selectName.visa_arr">{{item}}</Option>
+									</Select>
+
+
 								</FormItem>
 							</Col>
 							<Col span="8">
 								<FormItem :cube-input="true" label="DOB">
-									<Input :clear-btn="true" v-model="value" placeholder="DOB"></Input>
+                  <Input type="birthday" formatView="MM/DD/YYYY"  v-model="formUpdate.DOB" placeholder="MM/DD/YYYY"></Input>
 								</FormItem>
 							</Col>
 							<Col span="8">
 								<FormItem :cube-input="true" label="Current Location">
-									<Input :clear-btn="true" v-model="value" placeholder="Current Location"></Input>
+									<Input v-model="value" placeholder="Current Location"></Input>
 								</FormItem>
 							</Col>
 						</Row>
@@ -208,7 +216,7 @@
 												<Col span="12">
 													<FormItem :cube-input="true" >
                             <Select placeholder="Length">
-                            <Option :value="item" :key="index" v-for="(item, index) in selectName.year_length_name">{{item}}</Option>
+                              <Option :value="item" :key="index" v-for="(item, index) in selectName.year_length_name">{{item}}</Option>
 														</Select>
                             <!-- <Input :clear-btn="true" v-model="value" placeholder="Length"></Input> -->
 													</FormItem>
@@ -220,7 +228,7 @@
 												</Col>
 												<Col span="12">
 													<FormItem :cube-input="true" label="Startdate">
-														<Input :clear-btn="true" v-model="value" placeholder="Startdate"></Input>
+                            <Input type="birthday" formatView="MM/YYYY"  v-model="formUpdate.Startdate" placeholder="MM/YYYY"></Input>
 													</FormItem>
 												</Col>
 											</Row>
@@ -259,25 +267,22 @@
 									</Col>
 									<Col span="8">
 										<div class="item-btn">
-											<a class="btn-add-item">+ Add Attribute</a>
+											<!-- <a class="btn-add-item">+ Add Attribute</a> -->
 										</div>
 									</Col>
 								</Row>
 							</div>
 						</div>
 						<div class="form-group-split">
-
-            <FormItem :cube-input="true">
-							 <Tag v-for="item in count" :key="item" :name="item" closable @on-close="handleClose2">{{item}}</Tag>
+              <FormItem :cube-input="true">
                 <AutoComplete
                   v-model="newTag"
                   :data="data1"
-                  placeholder="Tags"
+                  placeholder="Add Skills"
                   style="width:200px">
                 </AutoComplete>
-  							<Button icon="ios-plus-empty" type="dashed" size="small" @click="handleAddTags(count)">Add Tags</Button>
+                <Button icon="ios-plus-empty" type="dashed" size="small" @click="handleAddTags(count)">Add</Button>
               </FormItem>
-
 						</div>
 					</div>
 
@@ -304,11 +309,22 @@
 									</Col>
 									<Col span="8">
 										<div class="item-btn">
-											<a class="btn-add-item">+ Add Attribute</a>
+											<!-- <a class="btn-add-item">+ Add Attribute</a> -->
 										</div>
 									</Col>
 								</Row>
 							</div>
+						</div>
+						<div class="form-group-split">
+              <FormItem :cube-input="true">
+                <AutoComplete
+                  v-model="newTag"
+                  :data="data1"
+                  placeholder="Add Language"
+                  style="width:200px">
+                </AutoComplete>
+                <Button icon="ios-plus-empty" type="dashed" size="small" @click="handleAddTags(count)">Add</Button>
+              </FormItem>
 						</div>
 					</div>
 
@@ -361,8 +377,8 @@
 											<FormItem :cube-input="true" label="Patent Name">
 												<Input :clear-btn="true" v-model="value" placeholder="Patent Name"></Input>
 											</FormItem>
-											<FormItem :cube-input="true" label="YYYY-MM-DD">
-												<Input type="birthday" formatView="YYYY-MM-DD" :clear-btn="true" v-model="value" placeholder="YYYY-MM-DD"></Input>
+											<FormItem :cube-input="true" label="Date">
+												<Input type="birthday" formatView="MM/DD/YYYY" :clear-btn="true" v-model="value" placeholder="MM/DD/YYYY"></Input>
 											</FormItem>
 										</div>
 									</Col>
@@ -386,8 +402,8 @@
 											<FormItem :cube-input="true" label="Conference / Journal Name">
 												<Input :clear-btn="true" v-model="value" placeholder="Conference / Journal Name"></Input>
 											</FormItem>
-											<FormItem :cube-input="true" label="YYYY-MM-DD">
-												<Input type="birthday" formatView="YYYY-MM-DD" :clear-btn="true" v-model="value" placeholder="YYYY-MM-DD"></Input>
+											<FormItem :cube-input="true" label="Date">
+												<Input type="birthday" formatView="MM/DD/YYYY" :clear-btn="true" v-model="value" placeholder="MM/DD/YYYY"></Input>
 											</FormItem>
 										</div>
 									</Col>
@@ -411,8 +427,8 @@
 											<FormItem :cube-input="true" label="Name">
 												<Input :clear-btn="true" v-model="value" placeholder="Name"></Input>
 											</FormItem>
-											<FormItem :cube-input="true" label="YYYY-MM-DD">
-												<Input type="birthday" formatView="YYYY-MM-DD" :clear-btn="true" v-model="value" placeholder="YYYY-MM-DD"></Input>
+											<FormItem :cube-input="true" label="Date">
+												<Input type="birthday" formatView="MM/DD/YYYY" :clear-btn="true" v-model="value" placeholder="MM/DD/YYYY"></Input>
 											</FormItem>
 										</div>
 									</Col>
@@ -548,14 +564,14 @@ export default {
     }
   },
   watch: {
-    'formUpdate.phoneNumber': function(val) {
+    'formUpdate.Mobile': function(val) {
       setTimeout(() => {
-        this.formUpdate.phoneNumber = val.replace(/[^\d^\+]/g, '')
+        this.formUpdate.Mobile = val.replace(/[^\d^\+]/g, '')
       }, 0)
     },
-    'formUpdate.name': function(val) {
+    'formUpdate.Name': function(val) {
       setTimeout(() => {
-        this.formUpdate.name = val.replace(/[\d]/g, '')
+        this.formUpdate.Name = val.replace(/[\d]/g, '')
       }, 0)
     }
   },

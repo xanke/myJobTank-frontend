@@ -208,7 +208,7 @@ async-limiter@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/async-limiter/-/async-limiter-1.0.0.tgz#78faed8c3d074ab81f22b4e985d79e8738f720f8"
 
-async-validator@^1.8.2, async-validator@~1.8.1:
+async-validator@^1.8.2:
   version "1.8.2"
   resolved "https://registry.yarnpkg.com/async-validator/-/async-validator-1.8.2.tgz#b77597226e96242f8d531c0d46ae295f62422ba4"
   dependencies:
@@ -426,10 +426,6 @@ babel-helper-replace-supers@^6.24.1:
     babel-template "^6.24.1"
     babel-traverse "^6.24.1"
     babel-types "^6.24.1"
-
-babel-helper-vue-jsx-merge-props@^2.0.0:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/babel-helper-vue-jsx-merge-props/-/babel-helper-vue-jsx-merge-props-2.0.3.tgz#22aebd3b33902328e513293a8e4992b384f9f1b6"
 
 babel-helpers@^6.24.1:
   version "6.24.1"
@@ -1791,7 +1787,7 @@ deep-extend@~0.4.0:
   version "0.4.2"
   resolved "https://registry.yarnpkg.com/deep-extend/-/deep-extend-0.4.2.tgz#48b699c27e334bf89f10892be432f6e4c7d34a7f"
 
-deepmerge@^1.2.0, deepmerge@^1.5.2:
+deepmerge@^1.5.2:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-1.5.2.tgz#10499d868844cdad4fee0842df8c7f6f0c95a753"
 
@@ -1924,7 +1920,7 @@ ecc-jsbn@~0.1.1:
   dependencies:
     jsbn "~0.1.0"
 
-echarts@^3.3.2:
+echarts@^3.8.5:
   version "3.8.5"
   resolved "https://registry.yarnpkg.com/echarts/-/echarts-3.8.5.tgz#58e4a51d2743c6fb75257b0dc0a9cf9f5378ac0e"
   dependencies:
@@ -1967,15 +1963,6 @@ element-resize-detector@^1.1.12:
 element-theme-default@^1.4.1:
   version "1.4.12"
   resolved "https://registry.yarnpkg.com/element-theme-default/-/element-theme-default-1.4.12.tgz#737d6be7af59dd530e7b69d6e1d7d5a205975f92"
-
-element-ui@^2.0.3:
-  version "2.0.9"
-  resolved "https://registry.yarnpkg.com/element-ui/-/element-ui-2.0.9.tgz#d05ddbeeff1c122a0420c50bfa7e1039cb77da57"
-  dependencies:
-    async-validator "~1.8.1"
-    babel-helper-vue-jsx-merge-props "^2.0.0"
-    deepmerge "^1.2.0"
-    throttle-debounce "^1.0.1"
 
 elliptic@^6.0.0:
   version "6.4.0"
@@ -3219,7 +3206,7 @@ isurl@^1.0.0-alpha5:
     has-to-string-tag-x "^1.2.0"
     is-object "^1.0.1"
 
-iview@^2.7.3:
+iview@^2.8.0:
   version "2.8.0"
   resolved "https://registry.yarnpkg.com/iview/-/iview-2.8.0.tgz#4f5ebfe493f1697c87022739ca27ddd8797a661c"
   dependencies:
@@ -3258,7 +3245,7 @@ js-beautify@^1.6.3:
     mkdirp "~0.5.0"
     nopt "~3.0.1"
 
-js-cookie@^2.1.4:
+js-cookie@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/js-cookie/-/js-cookie-2.2.0.tgz#1b2c279a6eece380a12168b92485265b35b1effb"
 
@@ -3789,7 +3776,7 @@ mockjs@^1.0.1-beta3:
   dependencies:
     commander "*"
 
-moment@^2.18.1:
+moment@^2.18.1, moment@^2.19.2:
   version "2.20.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.20.1.tgz#d6eb1a46cbcc14a2b2f9434112c1ff8907f313fd"
 
@@ -5541,10 +5528,6 @@ tar@^2.0.0, tar@^2.2.1:
     fstream "^1.0.2"
     inherits "2"
 
-throttle-debounce@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/throttle-debounce/-/throttle-debounce-1.0.1.tgz#dad0fe130f9daf3719fdea33dc36a8e6ba7f30b5"
-
 through2@^2.0.0:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/through2/-/through2-2.0.3.tgz#0004569b37c7c74ba39c43f3ced78d1ad94140be"
@@ -5802,9 +5785,9 @@ vary@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
 
-vee-validate@^2.0.0-rc.17:
-  version "2.0.0-rc.27"
-  resolved "https://registry.yarnpkg.com/vee-validate/-/vee-validate-2.0.0-rc.27.tgz#4366b684096200c90a408e261df0f6afb77e050e"
+vee-validate@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/vee-validate/-/vee-validate-2.0.2.tgz#521947756da97bb6dd219c71001f34663e189a59"
 
 vendors@^1.0.0:
   version "1.0.1"
@@ -5828,13 +5811,19 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
+vue-birthday-input@^0.8.5:
+  version "0.8.5"
+  resolved "https://registry.yarnpkg.com/vue-birthday-input/-/vue-birthday-input-0.8.5.tgz#ba4f120c461786b49ef6fb561bf2d4b1f2130f76"
+  dependencies:
+    moment "^2.19.2"
+
 vue-hot-reload-api@^2.0.11:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.2.4.tgz#683bd1d026c0d3b3c937d5875679e9a87ec6cd8f"
 
-vue-i18n@^7.3.1:
-  version "7.3.3"
-  resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-7.3.3.tgz#e162431fef05daae1a9b9b3992ac5be238eff954"
+vue-i18n@^7.4.0:
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-7.4.0.tgz#bd96cee90b3074e3f43e7347639e6fad0b45b6ae"
 
 vue-loader@^11.1.4:
   version "11.3.4"
@@ -5853,26 +5842,26 @@ vue-loader@^11.1.4:
     vue-style-loader "^2.0.0"
     vue-template-es2015-compiler "^1.2.2"
 
-vue-numeric@^2.1.2:
-  version "2.2.8"
-  resolved "https://registry.yarnpkg.com/vue-numeric/-/vue-numeric-2.2.8.tgz#640446ee21dc3c3d4b980966d27a5dde065c8feb"
+vue-numeric@^2.2.9:
+  version "2.2.9"
+  resolved "https://registry.yarnpkg.com/vue-numeric/-/vue-numeric-2.2.9.tgz#6c92cb9c8d4e881ebeda8547ad66dfb30647743e"
   dependencies:
     accounting-js "^1.1.1"
 
-vue-password@^1.0.1:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/vue-password/-/vue-password-1.1.0.tgz#7a085de3c7933c6ca8983bbf535c5417ca77a022"
+vue-password@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/vue-password/-/vue-password-1.1.1.tgz#fb6818c223ddd85b4f29adee0e9e5d015bd4feb2"
   dependencies:
     vue "^2.4.2"
     zxcvbn "^4.4.2"
 
-vue-resource@^1.3.4:
+vue-resource@^1.3.5:
   version "1.3.5"
   resolved "https://registry.yarnpkg.com/vue-resource/-/vue-resource-1.3.5.tgz#021d8713e9d86a77e83169dfdd8eab6047369a71"
   dependencies:
     got "^7.1.0"
 
-vue-router@^2.3.0:
+vue-router@^2.8.1:
   version "2.8.1"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-2.8.1.tgz#9833c9ee57ac83beb0269056fefee71713f20695"
 
@@ -5898,7 +5887,7 @@ vue-ueditor@^0.1.3:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/vue-ueditor/-/vue-ueditor-0.1.3.tgz#dcccb6ea83a1570b663a4a6a03ab2ee2acc4c471"
 
-vue@^2.4.2, vue@^2.5.3:
+vue@^2.4.2, vue@^2.5.13:
   version "2.5.13"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.13.tgz#95bd31e20efcf7a7f39239c9aa6787ce8cf578e1"
 
@@ -5906,7 +5895,7 @@ vuex-router-sync@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/vuex-router-sync/-/vuex-router-sync-5.0.0.tgz#1a225c17a1dd9e2f74af0a1b2c62072e9492b305"
 
-vuex@^2.0.0-rc.6:
+vuex@^2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/vuex/-/vuex-2.5.0.tgz#20f0265ade6c9a5ac6724a405d3ffdb4726c9741"
 
@@ -5918,9 +5907,9 @@ watchpack@^1.3.1:
     chokidar "^1.7.0"
     graceful-fs "^4.1.2"
 
-webpack-bundle-analyzer@^2.2.1:
-  version "2.9.1"
-  resolved "https://registry.yarnpkg.com/webpack-bundle-analyzer/-/webpack-bundle-analyzer-2.9.1.tgz#c2c8e03e8e5768ed288b39ae9e27a8b8d7b9d476"
+webpack-bundle-analyzer@^2.9.2:
+  version "2.9.2"
+  resolved "https://registry.yarnpkg.com/webpack-bundle-analyzer/-/webpack-bundle-analyzer-2.9.2.tgz#63ed86eb71cc4cda86f68e685a84530ba0126449"
   dependencies:
     acorn "^5.1.1"
     chalk "^1.1.3"
@@ -5932,7 +5921,7 @@ webpack-bundle-analyzer@^2.2.1:
     lodash "^4.17.4"
     mkdirp "^0.5.1"
     opener "^1.4.3"
-    ws "^3.3.1"
+    ws "^4.0.0"
 
 webpack-dev-middleware@^1.10.0:
   version "1.12.2"
@@ -6046,9 +6035,9 @@ wrappy@1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
 
-ws@^3.3.1:
-  version "3.3.3"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-3.3.3.tgz#f1cf84fe2d5e901ebce94efaece785f187a228f2"
+ws@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-4.0.0.tgz#bfe1da4c08eeb9780b986e0e4d10eccd7345999f"
   dependencies:
     async-limiter "~1.0.0"
     safe-buffer "~5.1.0"

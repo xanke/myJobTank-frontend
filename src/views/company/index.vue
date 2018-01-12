@@ -79,7 +79,7 @@
             <FormItem label="Company Name">
               <Input v-model="value" placeholder="Company Name"></Input>
             </FormItem>
-    
+
             <FormItem label="Job Position">
               <Input v-model="value" placeholder="Job Position"></Input>
             </FormItem>
@@ -98,9 +98,7 @@
             <FormItem label="Travel">
               <Input v-model="value" placeholder="Travel"></Input>
             </FormItem>
-            <FormItem label="Shift Pattern">
-              <Input v-model="value" placeholder="Shift Pattern"></Input>
-            </FormItem>
+
             <FormItem label="Shift Pattern">
               <Tag v-for="item in ['Englisth']" :key="item" :name="Language" closable @on-close="handleClose2">{{item}}</Tag>
               <Button icon="ios-plus-empty" type="dashed" size="small" @click="handleAdd">Add Language</Button>
@@ -120,11 +118,7 @@
               <Input v-model="value" placeholder="Compensation / Package"></Input>
             </FormItem>
 
-            <Col span="8" class="item-btn">
-              <div >
-                <div class="btn-add-item">+ Add Attribute</div>
-              </div>
-            </Col>
+
 
           </Form>
         </Col>
@@ -170,7 +164,7 @@ export default {
       line-height 125px
       color color-main
       font-size 16px
-  
+
 .input-cube
   input, textarea
     padding 10px
@@ -199,7 +193,7 @@ export default {
       color #FFF
     &:hover
       color #FFF
-  .ivu-btn-primary 
+  .ivu-btn-primary
     width 200px
 
 .page-wrap
