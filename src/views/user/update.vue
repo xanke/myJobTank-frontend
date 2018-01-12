@@ -65,14 +65,26 @@
 					</FormItem>
 					<FormItem>
 						<Upload
+              class="ivu-upload-ht"
 							multiple
+              :on-success="uploadSuccess"
 							type="drag"
 							:action="updateUrl">
-							<div style="padding: 20px 0">
-								<Icon class="icon-upload" type="wl-upload"></Icon>
+							<div slot="content">
 								<p class="desc">Drag and Drop Resume to Upload</p>
 								<p class="tips">PDF/ Doc./ Docx/ Text</p>
 							</div>
+              <div slot="content-top">
+								<p class="desc">Drag and Drop Resume to Upload</p>
+								<p class="tips">PDF/ Doc./ Docx/ Text</p>
+							</div>
+
+              <div slot="content-error">
+                <h2 class="title">Upload failed, Please check your document type</h2>
+								<p class="desc">Drag and Drop Resume to Upload</p>
+								<p class="tips">PDF/ Doc./ Docx/ Text</p>
+							</div>
+
 						</Upload>
 					</FormItem>
 
@@ -560,6 +572,9 @@ export default {
     )
   },
   methods: {
+    uploadSuccess() {
+      this.isUpdate = true
+    },
     handleAddTags(item) {
       item.push(this.newTag)
     },
