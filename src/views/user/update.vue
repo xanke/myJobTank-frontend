@@ -12,17 +12,17 @@
 					<FormItem>
 						<Row :gutter="20">
 							<Col span="8">
-								<FormItem label="Name" prop="name">
+								<FormItem label="Name" prop="Name">
                   <Input v-model="formUpdate.Name" placeholder="Name"></Input>
                 </FormItem>
               </Col>
 							<Col span="8">
-								<FormItem label="Email" prop="email">
+								<FormItem label="Email" prop="Mail">
 									<Input v-model="formUpdate.Mail" placeholder="Email"></Input>
 								</FormItem>
 							</Col>
 							<Col span="8">
-								<FormItem label="Phone Number" prop="phoneNumber">
+								<FormItem label="Phone Number" prop="Mobile">
 									<Input v-model="formUpdate.Mobile"  placeholder="Phone Number"></Input>
 								</FormItem>
 							</Col>
@@ -31,21 +31,21 @@
 					<FormItem>
 						<Row :gutter="20">
 							<Col span="8">
-								<FormItem label="Salary Range" prop="salaryRange">
+								<FormItem label="Salary Range" prop="SalaryRange">
 									<Select v-model="formUpdate.SalaryRange">
 										<Option :value="item" :key="index" v-for="(item, index) in selectName.salary_range_name">{{item}}</Option>
 									</Select>
 								</FormItem>
 							</Col>
 							<Col span="8">
-								<FormItem label="Preferred Location" prop="preferredLocation">
+								<FormItem label="Preferred Location" prop="PreferredLocation">
 									<Select v-model="formUpdate.PreferredLocation">
 										<Option :value="item" :key="index" v-for="(item, index) in selectName.preferred_location">{{item}}</Option>
 									</Select>
 								</FormItem>
 							</Col>
 							<Col span="8">
-								<FormItem label="Status" prop="status">
+								<FormItem label="Status" prop="Status">
 									<Select v-model="formUpdate.Status">
 										<Option :value="item" :key="index" v-for="(item, index) in selectName.update_status_name">{{item}}</Option>
 									</Select>
@@ -80,7 +80,7 @@
 						<Row :gutter="20">
 							<Col span="16">
 								<span class="step-desc">
-									<Icon class="icon-form-help" type="help" size="14"></Icon>Why submit your resume to us?
+									<Icon class="icon-form-help" type="help" size="14"></Icon>Why s2ubmit your resume to us?
 									<p class="desc">
 										•   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By submitting your resume to us, you create a profile in our database. Our recruiters will come across your resume during their search and offer possible internal referral job opportunities in well-known companies.
 										<br />•   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By submitting your resume to us, you will get a free one time resume enhancement session to help you create a perfect resume and land your dream job.
@@ -88,7 +88,7 @@
 								</span>
 							</Col>
 							<Col span="8">
-								<Button @click="handleUpdate" class="step-btn" type="primary" shape="circle" size="large">Analyze</Button>
+								<Button @click="handleUpdate" class="step-btn" type="primary" shape="circle" size="large" :disabled="!isUpdate">Analyze</Button>
 							</Col>
 						</Row>
 					</FormItem>
@@ -255,17 +255,16 @@
 						</div>
 						<div class="form-group-split">
 
-<FormItem :cube-input="true">
+            <FormItem :cube-input="true">
 							 <Tag v-for="item in count" :key="item" :name="item" closable @on-close="handleClose2">{{item}}</Tag>
                 <AutoComplete
                   v-model="newTag"
                   :data="data1"
-                  @on-search="handleSearch1"
                   placeholder="Tags"
                   style="width:200px">
                 </AutoComplete>
   							<Button icon="ios-plus-empty" type="dashed" size="small" @click="handleAddTags(count)">Add Tags</Button>
-</FormItem>
+              </FormItem>
 
 						</div>
 					</div>
@@ -415,7 +414,7 @@
 						</div>
 					</div>
 					<FormItem class="form-step-footer">
-						<Button class="step-btn" type="primary" shape="circle" size="large">Submit</Button>
+						<Button class="step-btn" type="primary" shape="circle" size="large" >Submit</Button>
 					</FormItem>
 				</Form>
 			</div>
@@ -444,19 +443,33 @@ export default {
       newTag: '',
       selectName,
       updateUrl: '',
+      isUpdate: false,
       count: ['Algorithms', 'LaTeX', 'Anti-Fraud'],
 
+      // formUpdate: {
+      //   Name: 'kong fanbo',
+      //   Mail: 'xank@qq.com',
+      //   Mobile: '13811112222',
+      //   SalaryRange: '5000 - 10000',
+      //   PreferredLocation: 'Shanghai.China',
+      //   Status: 'Full-time',
+      //   AcceptRelocation: true,
+      //   WillingToTravel: false,
+      //   FileId: ''
+      // },
+
       formUpdate: {
-        Name: 'kong fanbo',
-        Mail: 'xank@qq.com',
-        Mobile: '13811112222',
-        SalaryRange: '5000 - 10000',
-        PreferredLocation: 'Shanghai.China',
-        Status: 'Full-time',
-        AcceptRelocation: true,
+        Name: '',
+        Mail: '',
+        Mobile: '',
+        SalaryRange: '',
+        PreferredLocation: '',
+        Status: '',
+        AcceptRelocation: false,
         WillingToTravel: false,
         FileId: ''
       },
+
       //验证
       ruleUpdate: {
         Name: [
@@ -549,7 +562,6 @@ export default {
   methods: {
     handleAddTags(item) {
       item.push(this.newTag)
-
     },
     handleUpdate() {
       this.$refs.formUpdate.validate(valid => {
