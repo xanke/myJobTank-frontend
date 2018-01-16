@@ -109,9 +109,13 @@
             },
             filteredData () {
                 if (this.filterMethod) {
-                    return this.data.filter(item => this.filterMethod(this.currentValue, item));
+                    let data = this.data.filter(item => this.filterMethod(this.currentValue, item));
+                    if (data.length > 10)  data.length = 10;
+                    return data;
                 } else {
-                    return this.data;
+                    let data = this.data;
+                    if (data.length > 10)  data.length = 10;
+                    return data;
                 }
             }
         },

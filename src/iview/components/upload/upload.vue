@@ -19,15 +19,14 @@
               <div :style="{width: progress + '%'}" :class="[prefixCls + '-progress']">
                 <div :style="{width: domWitdh + 'px'}" class="ivu-upload-content top">
                   <span v-if="fileList.length > 0" class="num">{{progress}}%</span>
-                  <Icon v-else class="icon-upload" type="wl-upload"></Icon>
+                  <Icon v-else class="icon-upload" :type="icon"></Icon>
                   <slot name="content-top"></slot>
                 </div>
-
               </div>
             <!-- </transition> -->
             <div class="ivu-upload-content">
-                  <span v-if="fileList.length > 0" class="num">{{progress}}%</span>
-                  <Icon v-else class="icon-upload" type="wl-upload"></Icon>
+                <span v-if="fileList.length > 0" class="num">{{progress}}%</span>
+                <Icon v-else class="icon-upload" :type="icon"></Icon>
               <slot name="content"></slot>
             </div>
 
@@ -59,6 +58,10 @@ export default {
   mixins: [Emitter],
   components: { UploadList },
   props: {
+    icon: {
+      type: String,
+      default: 'wl-upload'
+    },
     action: {
       type: String,
       required: true
@@ -168,7 +171,7 @@ export default {
       fileList: [],
       tempIndex: 1,
       domWitdh: 0,
-      uploadError: true,
+      uploadError: false,
       progress: 0
     }
   },

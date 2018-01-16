@@ -7,62 +7,87 @@
 				<Step title="Analyze & Review"></Step>
 				<Step title="Submit"></Step>
 			</Steps>
+      <!-- 第一步开始 -->
 			<div class="step-form" v-if="step == 0">
-				<Form ref="formUpdate" :model="formUpdate" :rules="ruleUpdate"   label-position="top">
-					<FormItem>
-						<Row :gutter="20">
-							<Col span="8">
-								<FormItem label="Name" prop="Name">
-                  <Input v-model="formUpdate.Name" placeholder="Name"></Input>
-                </FormItem>
-              </Col>
-							<Col span="8">
-								<FormItem label="Email" prop="Mail">
-									<Input v-model="formUpdate.Mail" placeholder="Email"></Input>
-								</FormItem>
-							</Col>
-							<Col span="8">
-								<FormItem label="Phone Number" prop="Mobile">
-									<Input v-model="formUpdate.Mobile"  placeholder="Phone Number"></Input>
-								</FormItem>
-							</Col>
-						</Row>
-					</FormItem>
-					<FormItem>
-						<Row :gutter="20">
-							<Col span="8">
-								<FormItem label="Salary Range" prop="SalaryRange">
-									<Select v-model="formUpdate.SalaryRange">
-										<Option :value="item" :key="index" v-for="(item, index) in selectName.salary_range_name">{{item}}</Option>
-									</Select>
-								</FormItem>
-							</Col>
-							<Col span="8">
-								<FormItem label="Preferred Location" prop="PreferredLocation">
-									<Select v-model="formUpdate.PreferredLocation">
-										<Option :value="item" :key="index" v-for="(item, index) in selectName.preferred_location">{{item}}</Option>
-									</Select>
-								</FormItem>
-							</Col>
-							<Col span="8">
-								<FormItem label="Status" prop="Status">
-									<Select v-model="formUpdate.Status">
-										<Option :value="item" :key="index" v-for="(item, index) in selectName.update_status_name">{{item}}</Option>
-									</Select>
-								</FormItem>
-							</Col>
-						</Row>
-					</FormItem>
-					<FormItem>
-						<CheckboxGroup>
-							<Checkbox v-model="formUpdate.AcceptRelocation">
-								<span>Accept Relocation</span>
-							</Checkbox>
-							<Checkbox v-model="formUpdate.WillingToTravel">
-								<span>Willing to Travel</span>
-							</Checkbox>
-						</CheckboxGroup>
-					</FormItem>
+				<Form ref="formUpdate" :model="formUpdate" :rules="ruleUpdate" label-position="top">
+          <Row :gutter="20" style="display:flex;justify-content:left;">
+            <Col span="8">
+              <Upload
+                multiple
+                type="drag"
+                class="upload-avatar ivu-upload-avatar"
+                icon="wl-user"
+                action="//jsonplaceholder.typicode.com/posts/">
+                <div slot="content">
+                  <p class="desc">Upload</p>
+                  <p class="desc">Profile Image</p>
+                </div>
+                <div slot="content-top">
+                  <p class="desc">Upload</p>
+                  <p class="desc">Profile Image</p>
+                </div>
+                <div slot="content-error">
+                  <p class="desc">Upload</p>
+                  <p class="desc">Profile Image</p>
+                </div>
+              </Upload>
+            </Col>
+            <Col span="16">
+                <Row :gutter="20">
+                  <Col span="12">
+                    <FormItem label="Name" prop="Name">
+                      <Input v-model="formUpdate.Name" placeholder="Name"></Input>
+                    </FormItem>
+                  </Col>
+                  <Col span="12">
+                    <FormItem label="Email" prop="Mail">
+                      <Input v-model="formUpdate.Mail" placeholder="Email"></Input>
+                    </FormItem>
+                  </Col>
+                  <Col span="12">
+                    <FormItem label="Phone Number" prop="Mobile">
+                      <Input v-model="formUpdate.Mobile"  placeholder="Phone Number"></Input>
+                    </FormItem>
+                  </Col>
+                  <Col span="12">
+                    <FormItem label="Salary Range" prop="SalaryRange">
+                      <Select v-model="formUpdate.SalaryRange">
+                        <Option :value="item" :key="index" v-for="(item, index) in selectName.salary_range_name">{{item}}</Option>
+                      </Select>
+                    </FormItem>
+                  </Col>
+                  <Col span="12">
+                    <FormItem label="Status" prop="Status">
+                      <Select v-model="formUpdate.Status">
+                        <Option :value="item" :key="index" v-for="(item, index) in selectName.update_status_name">{{item}}</Option>
+                      </Select>
+                    </FormItem>
+                  </Col>
+                  <Col span="12">
+                    <FormItem label="Preferred Location" prop="PreferredLocation">
+                      <AutoComplete
+                        v-model="formUpdate.PreferredLocation"
+                        :data="selectName.city_arr"
+                        :filter-method="autoComplete"
+                        placeholder="Preferred Location"
+                        >
+                      </AutoComplete>
+                    </FormItem>
+                  </Col>
+                </Row>
+              </FormItem>
+              <FormItem>
+                <CheckboxGroup>
+                  <Checkbox v-model="formUpdate.AcceptRelocation">
+                    <span>Accept Relocation</span>
+                  </Checkbox>
+                  <Checkbox v-model="formUpdate.WillingToTravel">
+                    <span>Willing to Travel</span>
+                  </Checkbox>
+                </CheckboxGroup>
+              </FormItem>
+            </Col>
+          </Row>
 					<FormItem>
 						<Upload
               class="ivu-upload-ht"
@@ -588,6 +613,11 @@ export default {
     )
   },
   methods: {
+    autoComplete(value, option) {
+      let arr = option.toUpperCase().indexOf(value.toUpperCase()) !== -1
+      return arr
+    },
+
     uploadSuccess() {
       this.isUpdate = true
     },
