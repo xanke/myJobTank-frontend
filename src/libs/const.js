@@ -17,6 +17,13 @@ export const selectName = {
     'Actively looking',
     'Just look around'
   ],
+  employment_type: [
+    'Full-time',
+    'Full-time (contractor)',
+    'Part-time',
+    'Part-time(Contractor)',
+    'Intern'
+  ],
   salary_range_name: [
     '0 - 5000',
     '5000 - 10000',

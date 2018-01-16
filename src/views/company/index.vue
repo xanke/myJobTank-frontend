@@ -50,13 +50,7 @@
       :width="1000"
       ok-text="Add"
       :mask-closable="false">
-<!--       <Row>
-        <Col span="6">col-12</Col>
-        <Col span="18">
-           <Input v-model="value" placeholder="Enter something..." style="width: 300px"></Input>
-        </Col>
-      </Row>
- -->
+
       <Row :gutter="20">
         <Col span="6">
           <Upload
@@ -64,7 +58,7 @@
               type="drag"
               class="upload-compony-logo"
               action="//jsonplaceholder.typicode.com/posts/">
-              <div>
+              <div sort="content-top">
                   <p>Upload Logo</p>
               </div>
           </Upload>
@@ -73,51 +67,88 @@
           <Form  label-position="top" class="input-cube">
 
             <FormItem label="Summary">
-              <Input v-model="value" type="textarea" placeholder="Summary"></Input>
+              <Input v-model="form.Summary" type="textarea" placeholder="Summary"></Input>
             </FormItem>
 
             <FormItem label="Company Name">
-              <Input v-model="value" placeholder="Company Name"></Input>
+              <Input v-model="form.Name" placeholder="Company Name"></Input>
             </FormItem>
 
             <FormItem label="Job Position">
-              <Input v-model="value" placeholder="Job Position"></Input>
+              <Input v-model="form.Position" placeholder="Job Position"></Input>
             </FormItem>
             <FormItem label="Company Size">
-              <Input v-model="value" placeholder="Company Size"></Input>
+              <Input v-model="form.CompanySize" placeholder="Company Size"></Input>
             </FormItem>
             <FormItem label="Employment Type">
-              <Input v-model="value" placeholder="Employment Type"></Input>
+              <Select placeholder="Employment Type" v-model="form.EmploymentType">
+                <Option :value="item" :key="index" v-for="(item, index) in selectName.employment_type">{{item}}</Option>
+              </Select>
             </FormItem>
+            <FormItem label="Education">
+              <Select placeholder="Education" v-model="form.Education ">
+                <Option :value="item" :key="index" v-for="(item, index) in selectName.education_arr">{{item}}</Option>
+              </Select>
+            </FormItem>
+
             <FormItem label="Salary Range">
-              <Input v-model="value" placeholder="Salary Range"></Input>
+              <Select v-model="form.SalaryRange">
+                <Option :value="item" :key="index" v-for="(item, index) in selectName.salary_range_name">{{item}}</Option>
+              </Select>
+            </FormItem>
+            <FormItem label="Visa">
+              <Select v-model="form.Visa" placeholder="Visa">
+                <Option :value="item" :key="index" v-for="(item, index) in selectName.visa_arr">{{item}}</Option>
+              </Select>
             </FormItem>
             <FormItem label="Location">
-              <Input v-model="value" placeholder="Location"></Input>
+              <AutoComplete
+                v-model="form.Location"
+                :data="selectName.city_arr"
+                :filter-method="autoComplete"
+                placeholder="Preferred Location"
+                >
+              </AutoComplete>
             </FormItem>
-            <FormItem label="Travel">
-              <Input v-model="value" placeholder="Travel"></Input>
-            </FormItem>
-
-            <FormItem label="Shift Pattern">
-              <Tag v-for="item in ['Englisth']" :key="item" :name="Language" closable @on-close="handleClose2">{{item}}</Tag>
-              <Button icon="ios-plus-empty" type="dashed" size="small" @click="handleAdd">Add Language</Button>
-            </FormItem>
-
-            <FormItem label="Required Skills">
-              <Tag v-for="item in ['Englisth']" :key="item" :name="Language" closable @on-close="handleClose2">{{item}}</Tag>
-              <Button icon="ios-plus-empty" type="dashed" size="small" @click="handleAdd">Add Skills</Button>
+            <FormItem>
+              <Checkbox v-model="form.WillingToTravel">
+                <span>Travel Requirement</span>
+              </Checkbox>
             </FormItem>
 
-            <FormItem label="Education">
-              <Tag v-for="item in ['Englisth']" :key="item" :name="Language" closable @on-close="handleClose2">{{item}}</Tag>
-              <Button icon="ios-plus-empty" type="dashed" size="small" @click="handleAdd">Add Skills</Button>
+
+            <FormItem label="Language">
+              <Tag v-for="(item, index) in form.Language" :key="item" :name="item" closable @on-close="removeItem('Language', index)">{{item}}</Tag>
+              <AutoComplete
+                v-model="addTag.Language"
+                :data="selectName.language_arr"
+                :filter-method="autoComplete"
+                placeholder="Add Language"
+                style="width:200px; margin-right:20px"
+                >
+              </AutoComplete>
+              <Button icon="ios-plus-empty" type="dashed" @click="handleAddTags('Language')">Add</Button>
             </FormItem>
+
+            <FormItem label="Require Skills">
+              <Tag v-for="(item, index) in form.Skills" :key="item" :name="item" closable @on-close="removeItem('Skills', index)">{{item}}</Tag>
+              <AutoComplete
+                v-model="addTag.Skills"
+                :data="selectName.skill_arr"
+                :filter-method="autoComplete"
+                placeholder="Require Skills"
+                style="width:200px; margin-right:20px"
+                >
+              </AutoComplete>
+              <Button icon="ios-plus-empty" type="dashed" @click="handleAddTags('Skills')">Add</Button>
+            </FormItem>
+
 
             <FormItem label="Compensation / Package">
-              <Input v-model="value" placeholder="Compensation / Package"></Input>
+              <Select placeholder="Compensation / Package" v-model="form.CompensationPackage">
+                <Option :value="item" :key="index" v-for="(item, index) in selectName.compensation_arr">{{item}}</Option>
+              </Select>
             </FormItem>
-
 
 
           </Form>
@@ -128,22 +159,50 @@
 </template>
 
 <script type="text-/ecmascript-6">
-import companyItem from "@/components/company/companyItem"
-import floatBtn from "@/components/common/floatBtn"
+import companyItem from '@/components/company/companyItem'
+import floatBtn from '@/components/common/floatBtn'
+import { selectName } from '@/libs/const'
 export default {
   props: {},
   data() {
     return {
-      addCompany:false
+      selectName,
+      addCompany: true,
+      form: {
+        CompanySize: '',
+        Skills: ['Python'],
+        Language: ['Englist']
+      },
+      addTag: {
+        Skills: '',
+        Language: ''
+      }
     }
   },
   mounted() {},
   computed: {},
-  components: {companyItem, floatBtn},
-  filters: {},
+  components: { companyItem, floatBtn },
+  watch: {
+    'form.CompanySize': function(val) {
+      setTimeout(() => {
+        this.form.CompanySize = val.replace(/[^\d^\+]/g, '')
+      }, 0)
+    }
+  },
+
   methods: {
+    handleAddTags(type) {
+      this.form[type].push(this.addTag[type])
+    },
     openAddCompany() {
       this.addCompany = true
+    },
+    removeItem(type, index) {
+      this.form[type].splice(index, 1)
+    },
+    autoComplete(value, option) {
+      let arr = option.toUpperCase().indexOf(value.toUpperCase()) !== -1
+      return arr
     }
   },
 
@@ -169,6 +228,15 @@ export default {
   input, textarea
     padding 10px
     border-radius 0px !important
+  .ivu-select-selection
+    border-radius 0px !important
+    .ivu-select-arrow
+      right 15px
+    .ivu-select-placeholder
+      padding-left 10px
+      padding-right 0px
+  .ivu-select-dropdown
+    border-radius 0px !important
 
 .add-company-btn
   top 60px
@@ -176,6 +244,9 @@ export default {
   z-index 900
 
 .model-company
+  .ivu-btn.ivu-btn-text.ivu-btn-large
+    display: none
+
   .ivu-modal-body
     padding: 60px 80px
   .ivu-modal-close

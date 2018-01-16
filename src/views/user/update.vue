@@ -334,7 +334,7 @@
 						<div class="form-group-split">
               <FormItem :cube-input="true">
                 <AutoComplete
-                  v-model="addTag.skill"
+                  v-model="addTag.skills"
                   :data="selectName.skill_arr"
                   :filter-method="autoComplete"
                   placeholder="Add Skills"
@@ -656,7 +656,7 @@ export default {
         ]
       },
       addTag: {
-        skill: '',
+        skills: '',
         language: ''
       },
       formItem: {
@@ -736,12 +736,10 @@ export default {
       this.isUpdate = true
     },
     handleAddTags(type) {
-      if (type === 'skills') {
-        this.formUpdate.skills.push({
-          name: this.addTag.skill,
+        this.formUpdate[type].push({
+          name: this.addTag[type],
           rank: 1
         })
-      }
     },
     handleUpdate() {
       this.$refs.formUpdate.validate(valid => {
