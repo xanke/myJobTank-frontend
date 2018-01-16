@@ -59,15 +59,15 @@
  -->
       <Row :gutter="20">
         <Col span="6">
-    <Upload
-        multiple
-        type="drag"
-        class="upload-compony-logo"
-        action="//jsonplaceholder.typicode.com/posts/">
-        <div>
-            <p>Upload Logo</p>
-        </div>
-    </Upload>
+          <Upload
+              multiple
+              type="drag"
+              class="upload-compony-logo"
+              action="//jsonplaceholder.typicode.com/posts/">
+              <div>
+                  <p>Upload Logo</p>
+              </div>
+          </Upload>
         </Col>
         <Col span="18">
           <Form  label-position="top" class="input-cube">

@@ -131,9 +131,10 @@
 					</FormItem>
 				</Form>
 			</div>
-
+      <!-- 第二步开始 -->
 			<div class="step-form" v-if="step == 1">
 				<Form>
+          <!-- 基本资料开始 -->
 					<div class="form-group">
 						<p class="group-title">Personal Information</p>
 						<Row :gutter="65">
@@ -144,29 +145,34 @@
 							</Col>
 							<Col span="8">
 								<FormItem :cube-input="true" label="Mothertongue">
-									<Input v-model="formUpdate.Mothertongue" placeholder="Mothertongue"></Input>
+                  <AutoComplete
+                    v-model="formUpdate.Mothertongue"
+                    :data="selectName.language_arr"
+                    :filter-method="autoComplete"
+                    placeholder="Mothertongue"
+                    >
+                  </AutoComplete>
 								</FormItem>
 							</Col>
+              <Col span="8">
+                <FormItem :cube-input="true" label="Phone Number" prop="Mobile">
+                  <Input v-model="formUpdate.Mobile"  placeholder="Phone Number"></Input>
+                </FormItem>
+              </Col>
+              <Col span="8">
+                <FormItem :cube-input="true" label="Email" prop="Mail">
+                  <Input v-model="formUpdate.Mail" placeholder="Email"></Input>
+                </FormItem>
+              </Col>
 							<Col span="8">
 								<FormItem :cube-input="true" label="Nationality">
-									<Input v-model="formUpdate.Nationality" placeholder="Nationality"></Input>
-								</FormItem>
-							</Col>
-							<Col span="8">
-								<FormItem :cube-input="true">
-									<Select v-model="formUpdate.Gender" placeholder="Gender">
-										<Option :value="item" :key="index" v-for="(item, index) in selectName.gender_arr">{{item}}</Option>
-									</Select>
-
-								</FormItem>
-							</Col>
-							<Col span="8">
-								<FormItem :cube-input="true"  >
-
-									<Select v-model="formUpdate.Visa" placeholder="Visa">
-										<Option :value="item" :key="index" v-for="(item, index) in selectName.visa_arr">{{item}}</Option>
-									</Select>
-
+                  <AutoComplete
+                    v-model="formUpdate.Nationality"
+                    :data="selectName.country_arr"
+                    :filter-method="autoComplete"
+                    placeholder="Nationality"
+                    >
+                  </AutoComplete>
 
 								</FormItem>
 							</Col>
@@ -177,39 +183,71 @@
 							</Col>
 							<Col span="8">
 								<FormItem :cube-input="true" label="Current Location">
-									<Input v-model="value" placeholder="Current Location"></Input>
+                  <AutoComplete
+                    v-model="formUpdate.PreferredLocation"
+                    :data="selectName.city_arr"
+                    :filter-method="autoComplete"
+                    placeholder="Preferred Location"
+                    >
+                  </AutoComplete>
+                </FormItem>
+							</Col>
+							<Col span="8">
+								<FormItem :cube-input="true">
+									<Select v-model="formUpdate.Gender" placeholder="Gender">
+										<Option :value="item" :key="index" v-for="(item, index) in selectName.gender_arr">{{item}}</Option>
+									</Select>
+								</FormItem>
+							</Col>
+							<Col span="8">
+								<FormItem :cube-input="true"  >
+									<Select v-model="formUpdate.Visa" placeholder="Visa">
+										<Option :value="item" :key="index" v-for="(item, index) in selectName.visa_arr">{{item}}</Option>
+									</Select>
 								</FormItem>
 							</Col>
 						</Row>
 					</div>
-
+          <!-- 教育信息开始 -->
 					<div class="form-group">
 						<p class="group-title">Education</p>
 						<div class="form-group-child">
-							<div class="group-item">
+							<div class="group-item" >
 								<Row :gutter="0">
 									<Col span="16">
-										<div class="item-form">
+										<div class="item-form" :key="index" v-for="(item, index) in formUpdate.Education">
 											<Row :gutter="65">
 												<Col span="12">
 													<FormItem :cube-input="true" label="Institution">
-														<Input :clear-btn="true" v-model="value" placeholder="Institution"></Input>
+														<Input :clear-btn="true" v-model="item.Institution" placeholder="Institution"></Input>
 													</FormItem>
 												</Col>
 												<Col span="12">
 													<FormItem :cube-input="true" label="Major">
-														<Input :clear-btn="true" v-model="value" placeholder="Major"></Input>
+                            <AutoComplete
+                              :clear-btn="true"
+                              v-model="item.Major"
+                              :data="selectName.major_arr"
+                              :filter-method="autoComplete"
+                              placeholder="Major"
+                              >
+                            </AutoComplete>
 													</FormItem>
 												</Col>
 												<Col span="12">
 													<FormItem :cube-input="true" label="Degree">
-														<Input :clear-btn="true" v-model="value" placeholder="Degree"></Input>
+                            <AutoComplete
+                              v-model="item.Degree"
+                              :data="selectName.degree_arr"
+                              :filter-method="autoComplete"
+                              placeholder="Degree"
+                              >
+                            </AutoComplete>
 													</FormItem>
 												</Col>
 												<Col span="12">
 													<FormItem :cube-input="true" label="Gratuation Year">
-														<!-- <Input :clear-btn="true" v-model="value" placeholder="Gratuation Year"></Input> -->
-                            <Input type="birthday" formatView="YYYY" :clear-btn="true" v-model="value" placeholder="YYYY"></Input>
+                            <Input type="birthday" formatView="YYYY" :clear-btn="true" v-model="item.Date" placeholder="YYYY"></Input>
 													</FormItem>
 												</Col>
 											</Row>
@@ -217,51 +255,50 @@
 									</Col>
 									<Col span="8" class="item-btn">
 										<div >
-											<a class="btn-add-item">+ Add Attribute</a>
+											<a class="btn-add-item" @click="addAttribute('Education')">+ Add Attribute</a>
 										</div>
 									</Col>
 								</Row>
 							</div>
 						</div>
 					</div>
-
+          <!-- 工作信息开始 -->
 					<div class="form-group">
 						<p class="group-title">Employment History</p>
 						<div class="form-group-child">
 							<div class="group-item">
 								<Row :gutter="0">
 									<Col span="16">
-										<div class="item-form">
+										<div class="item-form" :key="index" v-for="(item, index) in formUpdate.Employment">
 											<Row :gutter="65">
 												<Col span="12">
 													<FormItem :cube-input="true" label="Employer">
-														<Input :clear-btn="true" v-model="value" placeholder="Employer"></Input>
+														<Input :clear-btn="true" v-model="item.Employer" placeholder="Employer"></Input>
 													</FormItem>
 												</Col>
 												<Col span="12">
 													<FormItem :cube-input="true" >
-                            <Select placeholder="Length">
+                            <Select placeholder="Length" v-model="item.Length">
                               <Option :value="item" :key="index" v-for="(item, index) in selectName.year_length_name">{{item}}</Option>
 														</Select>
-                            <!-- <Input :clear-btn="true" v-model="value" placeholder="Length"></Input> -->
 													</FormItem>
 												</Col>
 												<Col span="12">
 													<FormItem :cube-input="true" label="Job Position">
-														<Input :clear-btn="true" v-model="value" placeholder="Job Position"></Input>
+														<Input :clear-btn="true" v-model="item.Position" placeholder="Job Position"></Input>
 													</FormItem>
 												</Col>
 												<Col span="12">
 													<FormItem :cube-input="true" label="Startdate">
-                            <Input type="birthday" formatView="MM/YYYY"  v-model="formUpdate.Startdate" placeholder="MM/YYYY"></Input>
+                            <Input type="birthday" formatView="MM/YYYY"  v-model="item.Startdate" placeholder="MM/YYYY"></Input>
 													</FormItem>
 												</Col>
 											</Row>
 										</div>
 									</Col>
-									<Col span="8"  class="item-btn">
+									<Col span="8" class="item-btn">
 										<div>
-											<a class="btn-add-item">+ Add Attribute</a>
+											<a class="btn-add-item" @click="addAttribute('Employment')">+ Add Attribute</a>
 										</div>
 									</Col>
 								</Row>
@@ -276,24 +313,20 @@
 								<Row :gutter="0">
 									<Col span="16">
 										<Row :gutter="65">
-											<Col span="12">
-												<FormItem :cube-input="true" label="Python" class="skill-item">
-													<Input :clear-btn="true" v-model="value"></Input>
-													<Rate :circle="true" :count="10" v-model="value"></Rate>
-												</FormItem>
-											</Col>
-											<Col span="12">
-												<FormItem :cube-input="true" label="Java" class="skill-item">
-													<Input :clear-btn="true" v-model="value"></Input>
-													<Rate :circle="true" :count="10" v-model="value"></Rate>
-												</FormItem>
+											<Col span="12" :key="index" v-for="(item, index) in formUpdate.skills">
+												<div :cube-input="true" class="skill-item">
+                          <div class="skill_hd">
+                            <span class="name">
+                              {{item.name}}
+                            </span>
+                            <span class="del" @click="removeItem('skills', index)">
+                            <Icon type="wl-close"></Icon>
+                            </span>
+                          </div>
+													<Rate :circle="true" :count="10" v-model="item.rank"></Rate>
+												</div>
 											</Col>
 										</Row>
-									</Col>
-									<Col span="8">
-										<div class="item-btn">
-											<!-- <a class="btn-add-item">+ Add Attribute</a> -->
-										</div>
 									</Col>
 								</Row>
 							</div>
@@ -301,12 +334,13 @@
 						<div class="form-group-split">
               <FormItem :cube-input="true">
                 <AutoComplete
-                  v-model="newTag"
-                  :data="data1"
+                  v-model="addTag.skill"
+                  :data="selectName.skill_arr"
+                  :filter-method="autoComplete"
                   placeholder="Add Skills"
                   style="width:200px">
                 </AutoComplete>
-                <Button icon="ios-plus-empty" type="dashed" size="small" @click="handleAddTags(count)">Add</Button>
+                <Button type="primary" @click="handleAddTags('skills')">Add</Button>
               </FormItem>
 						</div>
 					</div>
@@ -318,24 +352,20 @@
 								<Row :gutter="0">
 									<Col span="16">
 										<Row :gutter="65">
-											<Col span="12">
-												<FormItem :cube-input="true" label="English" class="skill-item">
-													<Input :clear-btn="true" v-model="value"></Input>
-													<Rate :circle="true" :count="10" v-model="value"></Rate>
-												</FormItem>
-											</Col>
-											<Col span="12">
-												<FormItem :cube-input="true" label="Spanish" class="skill-item">
-													<Input :clear-btn="true" v-model="value"></Input>
-													<Rate :circle="true" :count="10" v-model="value"></Rate>
-												</FormItem>
+											<Col span="12" :key="index" v-for="(item, index) in formUpdate.language">
+												<div class="skill-item">
+                          <div class="skill_hd">
+                            <span class="name">
+                              {{item.name}}
+                            </span>
+                            <span class="del" @click="removeItem('language', index)">
+                            <Icon type="wl-close"></Icon>
+                            </span>
+                          </div>
+													<Rate :circle="true" :count="10" v-model="item.rank"></Rate>
+												</div>
 											</Col>
 										</Row>
-									</Col>
-									<Col span="8">
-										<div class="item-btn">
-											<!-- <a class="btn-add-item">+ Add Attribute</a> -->
-										</div>
 									</Col>
 								</Row>
 							</div>
@@ -343,34 +373,38 @@
 						<div class="form-group-split">
               <FormItem :cube-input="true">
                 <AutoComplete
-                  v-model="newTag"
-                  :data="data1"
+                  v-model="addTag.language"
+                  :data="selectName.language_arr"
+                  :filter-method="autoComplete"
                   placeholder="Add Language"
                   style="width:200px">
                 </AutoComplete>
-                <Button icon="ios-plus-empty" type="dashed" size="small" @click="handleAddTags(count)">Add</Button>
+                <Button type="primary" @click="handleAddTags('language')">Add</Button>
               </FormItem>
 						</div>
 					</div>
-
+          <!-- 工作经历开始 -->
 					<div class="form-group">
 						<p class="group-title">Employment History</p>
 						<div class="form-group-child">
 							<div class="group-item">
 								<Row :gutter="65">
 									<Col span="8">
-										<FormItem label="Salary Range">
-                      <Select  v-model="formUpdate.salaryRange">
+										<FormItem>
+                      <Select placeholder="Salary Range" v-model="formUpdate.salaryRange">
                         <Option :value="item" :key="index" v-for="(item, index) in selectName.salary_range_name">{{item}}</Option>
                       </Select>
 										</FormItem>
-										<FormItem label="Preferred Location">
-                      <Select  v-model="formUpdate.preferredLocation">
-                        <Option :value="item" :key="index" v-for="(item, index) in selectName.preferred_location">{{item}}</Option>
-                      </Select>
+										<FormItem>
+                      <AutoComplete
+                        v-model="formUpdate.preferredLocation"
+                        :data="selectName.city_arr"
+                        placeholder="Preferred Location"
+                      >
+                      </AutoComplete>
 										</FormItem>
-										<FormItem label="Status">
-                      <Select  v-model="formUpdate.status">
+										<FormItem>
+                      <Select placeholder="status" v-model="formUpdate.status">
                         <Option :value="item" :key="index" v-for="(item, index) in selectName.update_status_name">{{item}}</Option>
                       </Select>
 										</FormItem>
@@ -391,75 +425,73 @@
 							</div>
 						</div>
 					</div>
-
+          <!-- 附加项开始 -->
 					<div class="form-group">
 						<p class="group-title">Patent</p>
 						<div class="form-group-child">
 							<div class="group-item">
 								<Row :gutter="0">
 									<Col span="16">
-										<div class="item-form">
+										<div class="item-form" :key="index" v-for="(item, index) in formUpdate.Patent">
 											<FormItem :cube-input="true" label="Patent Name">
-												<Input :clear-btn="true" v-model="value" placeholder="Patent Name"></Input>
+												<Input :clear-btn="true" v-model="item.name" placeholder="Patent Name"></Input>
 											</FormItem>
 											<FormItem :cube-input="true" label="Date">
-												<Input type="birthday" formatView="MM/DD/YYYY" :clear-btn="true" v-model="value" placeholder="MM/DD/YYYY"></Input>
+												<Input type="birthday" formatView="MM/DD/YYYY" :clear-btn="true" v-model="item.date" placeholder="MM/DD/YYYY"></Input>
 											</FormItem>
 										</div>
 									</Col>
-									<Col span="8"  class="item-btn">
+									<Col span="8" class="item-btn">
 										<div>
-											<a class="btn-add-item">+ Add Attribute</a>
+											<a class="btn-add-item" @click="addAttribute('Patent')">+ Add Attribute</a>
 										</div>
 									</Col>
 								</Row>
 							</div>
 						</div>
 					</div>
-
 					<div class="form-group">
 						<p class="group-title">Publication</p>
 						<div class="form-group-child">
 							<div class="group-item">
 								<Row :gutter="0">
 									<Col span="16">
-										<div class="item-form">
+										<div class="item-form" :key="index" v-for="(item, index) in formUpdate.Publication">
 											<FormItem :cube-input="true" label="Conference / Journal Name">
-												<Input :clear-btn="true" v-model="value" placeholder="Conference / Journal Name"></Input>
+												<Input :clear-btn="true" v-model="item.name" placeholder="Conference / Journal Name"></Input>
 											</FormItem>
 											<FormItem :cube-input="true" label="Date">
-												<Input type="birthday" formatView="MM/DD/YYYY" :clear-btn="true" v-model="value" placeholder="MM/DD/YYYY"></Input>
+												<Input type="birthday" formatView="MM/DD/YYYY" :clear-btn="true" v-model="item.date" placeholder="MM/DD/YYYY"></Input>
 											</FormItem>
 										</div>
 									</Col>
 									<Col span="8"  class="item-btn">
 										<div>
-											<a class="btn-add-item">+ Add Attribute</a>
+											<a class="btn-add-item" @click="addAttribute('Publication')">+ Add Attribute</a>
 										</div>
 									</Col>
 								</Row>
 							</div>
 						</div>
 					</div>
-
 					<div class="form-group">
 						<p class="group-title">License and Certification</p>
 						<div class="form-group-child">
 							<div class="group-item">
 								<Row :gutter="0">
 									<Col span="16">
-										<div class="item-form">
+										<div class="item-form" :key="index" v-for="(item, index) in formUpdate.License">
 											<FormItem :cube-input="true" label="Name">
-												<Input :clear-btn="true" v-model="value" placeholder="Name"></Input>
+												<Input :clear-btn="true" v-model="item.name" placeholder="Name"></Input>
 											</FormItem>
 											<FormItem :cube-input="true" label="Date">
-												<Input type="birthday" formatView="MM/DD/YYYY" :clear-btn="true" v-model="value" placeholder="MM/DD/YYYY"></Input>
+												<Input type="birthday" formatView="MM/DD/YYYY" :clear-btn="true" v-model="item.date" placeholder="MM/DD/YYYY"></Input>
 											</FormItem>
 										</div>
 									</Col>
 									<Col span="8"  class="item-btn">
 										<div>
-											<a class="btn-add-item">+ Add Attribute</a>
+											<a class="btn-add-item" @click="addAttribute('License')">+ Add Attribute</a>
 										</div>
 									</Col>
 								</Row>
@@ -520,7 +552,61 @@ export default {
         Status: '',
         AcceptRelocation: false,
         WillingToTravel: false,
-        FileId: ''
+        FileId: '',
+        Education: [
+          {
+            Institution: '',
+            Major: '',
+            Degree: '',
+            Date: ''
+          }
+        ],
+        Employment: [
+          {
+            Employer: '',
+            Length: '',
+            Position: '',
+            Startdate: ''
+          }
+        ],
+        skills: [
+          {
+            name: 'Python',
+            rank: 1
+          },
+          {
+            name: 'Java',
+            rank: 1
+          }
+        ],
+        language: [
+          {
+            name: 'English',
+            rank: 1
+          },
+          {
+            name: 'Spanish',
+            rank: 1
+          }
+        ],
+        Patent: [
+          {
+            name: '',
+            date: ''
+          }
+        ],
+        Publication: [
+          {
+            name: '',
+            date: ''
+          }
+        ],
+        License: [
+          {
+            name: '',
+            date: ''
+          }
+        ]
       },
 
       //验证
@@ -569,7 +655,10 @@ export default {
           }
         ]
       },
-
+      addTag: {
+        skill: '',
+        language: ''
+      },
       formItem: {
         input: '',
         select: '',
@@ -613,16 +702,46 @@ export default {
     )
   },
   methods: {
+    removeItem(type, index){
+      this.formUpdate[type].splice(index, 1)
+    },
     autoComplete(value, option) {
       let arr = option.toUpperCase().indexOf(value.toUpperCase()) !== -1
       return arr
+    },
+    addAttribute(type) {
+      if (type === 'Education') {
+        this.formUpdate.Education.push({
+          Institution: '',
+          Major: '',
+          Degree: '',
+          Date: ''
+        })
+      } else if (type === 'Employment') {
+        this.formUpdate.Employment.push({
+          Employer: '',
+          Length: '',
+          Position: '',
+          Startdate: ''
+        })
+      } else {
+        this.formUpdate[type].push({
+          name:'',
+          date:''
+        })
+      }
     },
 
     uploadSuccess() {
       this.isUpdate = true
     },
-    handleAddTags(item) {
-      item.push(this.newTag)
+    handleAddTags(type) {
+      if (type === 'skills') {
+        this.formUpdate.skills.push({
+          name: this.addTag.skill,
+          rank: 1
+        })
+      }
     },
     handleUpdate() {
       this.$refs.formUpdate.validate(valid => {
@@ -727,10 +846,12 @@ primary-color = #E36D01; // #2d8cf0;
 
     .group-item {
       position: relative;
+      // &:
 
       .item-form {
         padding: 24px;
         border: 1px dashed #CCCCCC;
+        margin-bottom: 24px;
       }
 
       .item-btn {
@@ -785,6 +906,27 @@ primary-color = #E36D01; // #2d8cf0;
 }
 
 .skill-item {
+  position: relative;
+  .del{
+    position: absolute;
+    right: 5px;
+    top: 0px;
+    cursor: pointer;
+    color #999;
+    &:hover{
+      color: #333;
+    }
+    .ivu-icon{
+      font-size: 12px;
+    }
+  }
+  .skill_hd{
+    border-bottom: 1px solid #EEE;
+    padding-bottom: 8px;
+    .title{
+      color: #999;
+    }
+  }
   .ivu-rate {
     margin-top: 15px;
   }
