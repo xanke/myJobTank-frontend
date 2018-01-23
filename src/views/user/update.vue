@@ -12,70 +12,54 @@
 				<Form ref="formUpdate" :model="formUpdate" :rules="ruleUpdate" label-position="top">
           <Row :gutter="20" style="display:flex;justify-content:left;">
             <Col span="8">
-              <Upload
-                multiple
-                type="drag"
-                class="upload-avatar ivu-upload-avatar"
-                icon="wl-user"
-                action="//jsonplaceholder.typicode.com/posts/">
-                <div slot="content">
-                  <p class="desc">Upload</p>
-                  <p class="desc">Profile Image</p>
-                </div>
-                <div slot="content-top">
-                  <p class="desc">Upload</p>
-                  <p class="desc">Profile Image</p>
-                </div>
-                <div slot="content-error">
-                  <p class="desc">Upload</p>
-                  <p class="desc">Profile Image</p>
-                </div>
-              </Upload>
-            </Col>
-            <Col span="16">
-                <Row :gutter="20">
-                  <Col span="12">
-                    <FormItem label="Name" prop="Name">
-                      <Input v-model="formUpdate.Name" placeholder="Name"></Input>
-                    </FormItem>
-                  </Col>
-                  <Col span="12">
-                    <FormItem label="Email" prop="Mail">
-                      <Input v-model="formUpdate.Mail" placeholder="Email"></Input>
-                    </FormItem>
-                  </Col>
-                  <Col span="12">
-                    <FormItem label="Phone Number" prop="Mobile">
-                      <Input v-model="formUpdate.Mobile"  placeholder="Phone Number"></Input>
-                    </FormItem>
-                  </Col>
-                  <Col span="12">
-                    <FormItem label="Salary Range" prop="SalaryRange">
-                      <Select v-model="formUpdate.SalaryRange">
-                        <Option :value="item" :key="index" v-for="(item, index) in selectName.salary_range_name">{{item}}</Option>
-                      </Select>
-                    </FormItem>
-                  </Col>
-                  <Col span="12">
-                    <FormItem label="Status" prop="Status">
-                      <Select v-model="formUpdate.Status">
-                        <Option :value="item" :key="index" v-for="(item, index) in selectName.update_status_name">{{item}}</Option>
-                      </Select>
-                    </FormItem>
-                  </Col>
-                  <Col span="12">
-                    <FormItem label="Preferred Location" prop="PreferredLocation">
-                      <AutoComplete
-                        v-model="formUpdate.PreferredLocation"
-                        :data="selectName.city_arr"
-                        :filter-method="autoComplete"
-                        placeholder="Preferred Location"
-                        >
-                      </AutoComplete>
-                    </FormItem>
-                  </Col>
-                </Row>
+              <FormItem label="Name" prop="Name">
+                <Input v-model="formUpdate.Name" placeholder="Name"></Input>
               </FormItem>
+            </Col>
+            <Col span="8">
+              <FormItem label="Email" prop="Mail">
+                <Input v-model="formUpdate.Mail" placeholder="Email"></Input>
+              </FormItem>
+            </Col>
+            <Col span="8">
+              <FormItem label="Phone Number" prop="Mobile">
+                <Input v-model="formUpdate.Mobile"  placeholder="Phone Number"></Input>
+              </FormItem>
+            </Col>
+
+            </Row>
+            <Row :gutter="20" style="display:flex;justify-content:left;">
+              <Col span="8">
+                <FormItem label="Salary Range" prop="SalaryRange">
+                  <Select v-model="formUpdate.SalaryRange">
+                    <Option :value="item" :key="index" v-for="(item, index) in selectName.salary_range_name">{{item}}</Option>
+                  </Select>
+                </FormItem>
+              </Col>
+              <Col span="8">
+                <FormItem label="Status" prop="Status">
+                  <Select v-model="formUpdate.Status">
+                    <Option :value="item" :key="index" v-for="(item, index) in selectName.update_status_name">{{item}}</Option>
+                  </Select>
+                </FormItem>
+              </Col>
+              <Col span="8">
+                <FormItem label="Preferred Location" prop="PreferredLocation">
+                  <AutoComplete
+                    v-model="formUpdate.PreferredLocation"
+                    :data="selectName.city_arr"
+                    :filter-method="autoComplete"
+                    placeholder="Preferred Location"
+                    >
+                  </AutoComplete>
+                </FormItem>
+              </Col>
+
+              </FormItem>
+
+            </Row>
+            <Row :gutter="20" style="display:flex;justify-content:left;">
+
               <FormItem>
                 <CheckboxGroup>
                   <Checkbox v-model="formUpdate.AcceptRelocation">
@@ -86,7 +70,7 @@
                   </Checkbox>
                 </CheckboxGroup>
               </FormItem>
-            </Col>
+
           </Row>
 					<FormItem>
 						<Upload
@@ -506,7 +490,12 @@
 			<!-- 第二步结束 -->
 			<div class="step-form" v-if="step == 2">
 				<div class="step-finish">
-					<i class="icon-finish ivu-icon ivu-icon-wl-check-big"></i>
+					<i class="icon-finish">
+
+            <div class="icon-finish__inner  ivu-icon ivu-icon-wl-check-big">
+
+            </div>
+          </i>
 			 		<p class="desc">Your Resume Was Successfully Upload!</p>
 				</div>
 			</div>
@@ -702,7 +691,7 @@ export default {
     )
   },
   methods: {
-    removeItem(type, index){
+    removeItem(type, index) {
       this.formUpdate[type].splice(index, 1)
     },
     autoComplete(value, option) {
@@ -726,8 +715,8 @@ export default {
         })
       } else {
         this.formUpdate[type].push({
-          name:'',
-          date:''
+          name: '',
+          date: ''
         })
       }
     },
@@ -736,10 +725,10 @@ export default {
       this.isUpdate = true
     },
     handleAddTags(type) {
-        this.formUpdate[type].push({
-          name: this.addTag[type],
-          rank: 1
-        })
+      this.formUpdate[type].push({
+        name: this.addTag[type],
+        rank: 1
+      })
     },
     handleUpdate() {
       this.$refs.formUpdate.validate(valid => {
@@ -881,19 +870,23 @@ primary-color = #E36D01; // #2d8cf0;
   text-align: center;
   padding-bottom: 100px;
 
+
   .icon-finish {
-    display: inline-block;
     background: #FFFFFF;
-    box-shadow: 0 0 16px 0 #EEEEEE;
+    display: inline-block;
     width: 230px;
     height: 230px;
     border-radius: 100%;
-    text-align: center;
-    font-size: 150px;
-    line-height: 230px;
-    background-image: -webkit-gradient(linear, 10 50, 0 bottom, from(#FF9900), to(#EE0808));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    box-shadow: 0 0 16px 0 #EEEEEE;
+    &__inner{
+      text-align: center;
+      font-size: 150px;
+      width 100%
+      line-height: 230px;
+      background-image: -webkit-gradient(linear, 10 50, 0 bottom, from(#FF9900), to(#EE0808));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
   }
 
   .desc {

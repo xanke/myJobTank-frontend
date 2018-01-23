@@ -53,27 +53,31 @@
 
       <Row :gutter="20">
         <Col span="6">
-          <Upload
-              multiple
-              type="drag"
-              class="upload-compony-logo"
-              action="//jsonplaceholder.typicode.com/posts/">
-              <div sort="content-top">
-                  <p>Upload Logo</p>
-              </div>
-          </Upload>
+
+              <Upload
+                multiple
+                type="drag"
+                class="upload-avatar ivu-upload-avatar upload-compony-logo"
+
+                action="//jsonplaceholder.typicode.com/posts/">
+                <div slot="content">
+                  <p class="desc">Upload Logo</p>
+                </div>
+                <div slot="content-top">
+                  <p class="desc">Upload Logo</p>
+                </div>
+                <div slot="content-error">
+                  <p class="desc">Upload Logo</p>
+                </div>
+              </Upload>
+
         </Col>
         <Col span="18">
           <Form  label-position="top" class="input-cube">
 
-            <FormItem label="Summary">
-              <Input v-model="form.Summary" type="textarea" placeholder="Summary"></Input>
-            </FormItem>
-
             <FormItem label="Company Name">
               <Input v-model="form.Name" placeholder="Company Name"></Input>
             </FormItem>
-
             <FormItem label="Job Position">
               <Input v-model="form.Position" placeholder="Job Position"></Input>
             </FormItem>
@@ -85,6 +89,34 @@
                 <Option :value="item" :key="index" v-for="(item, index) in selectName.employment_type">{{item}}</Option>
               </Select>
             </FormItem>
+            <FormItem label="Work Experience">
+              <Select v-model="form.WorkExperience" placeholder="Work Experience">
+                <Option :value="item" :key="index" v-for="(item, index) in selectName.year_length_name">{{item}}</Option>
+              </Select>
+            </FormItem>
+            <FormItem label="Location">
+              <AutoComplete
+                v-model="form.Location"
+                :data="selectName.city_arr"
+                :filter-method="autoComplete"
+                placeholder="Preferred Location"
+                >
+              </AutoComplete>
+            </FormItem>
+
+
+
+            <FormItem>
+              <Checkbox v-model="form.WillingToTravel">
+                <span>Travel Requirement</span>
+              </Checkbox>
+            </FormItem>
+
+            <FormItem label="Summary">
+              <Input v-model="form.Summary" type="textarea" placeholder="Summary"></Input>
+            </FormItem>
+
+
             <FormItem label="Education">
               <Select placeholder="Education" v-model="form.Education ">
                 <Option :value="item" :key="index" v-for="(item, index) in selectName.education_arr">{{item}}</Option>
@@ -101,20 +133,6 @@
                 <Option :value="item" :key="index" v-for="(item, index) in selectName.visa_arr">{{item}}</Option>
               </Select>
             </FormItem>
-            <FormItem label="Location">
-              <AutoComplete
-                v-model="form.Location"
-                :data="selectName.city_arr"
-                :filter-method="autoComplete"
-                placeholder="Preferred Location"
-                >
-              </AutoComplete>
-            </FormItem>
-            <FormItem>
-              <Checkbox v-model="form.WillingToTravel">
-                <span>Travel Requirement</span>
-              </Checkbox>
-            </FormItem>
 
 
             <FormItem label="Language">
@@ -127,7 +145,7 @@
                 style="width:200px; margin-right:20px"
                 >
               </AutoComplete>
-              <Button icon="ios-plus-empty" type="dashed" @click="handleAddTags('Language')">Add</Button>
+              <a class="btn-add-item"  type="dashed" @click="handleAddTags('Language')">+ Add Languages</a>
             </FormItem>
 
             <FormItem label="Require Skills">
@@ -140,7 +158,27 @@
                 style="width:200px; margin-right:20px"
                 >
               </AutoComplete>
-              <Button icon="ios-plus-empty" type="dashed" @click="handleAddTags('Skills')">Add</Button>
+              <a class="btn-add-item" icon="ios-plus-empty" type="dashed" @click="handleAddTags('Skills')">+ Add Skills
+              </a>
+            </FormItem>
+
+            <FormItem label="Compesnsation">
+              <Checkbox v-model="form.Option">
+                <span>Option</span>
+              </Checkbox>
+              <Checkbox v-model="form.Commissions">
+                <span>Commissions</span>
+              </Checkbox>
+              <Checkbox v-model="form.Overtime">
+                <span>Overtime Pay</span>
+              </Checkbox>
+              <br />
+              <Checkbox v-model="form.Bonuses">
+                <span>Bonuses</span>
+              </Checkbox>
+              <Checkbox v-model="form.Allowance">
+                <span>Travel / Meal /Housing Allowance</span>
+              </Checkbox>
             </FormItem>
 
 
@@ -213,7 +251,31 @@ export default {
 <style lang="stylus">
 @import '../../assets/stylus/base.styl';
 
+
+.btn-add-item {
+  font-style: italic;
+  font-weight: bold;
+  color: #999;
+  position: absolute;
+  line-height: 24px;
+  margin-top: -12px;
+  top: 50%;
+  transition: 0.5s;
+
+
+  &:hover {
+    color: primary-color;
+  }
+}
+
 .upload-compony-logo
+  .ivu-upload-content
+    padding-top: 0px
+    display flex
+    justify-content center
+    align-items center
+    .icon-upload
+      display: none
   .ivu-upload-drag
     width 125px
     height 125px

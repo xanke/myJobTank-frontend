@@ -1,6 +1,5 @@
 <template>
     <div :class="wrapClasses" :style="styles">
-        <div :class="[prefixCls + '-tail']"><i></i></div>
         <div :class="[prefixCls + '-head']">
             <div :class="[prefixCls + '-head-inner']">
             <!-- {{ stepNumber }} -->
@@ -14,6 +13,7 @@
                 <div v-if="content" :class="[prefixCls + '-content']">{{ content }}</div>
             </slot>
         </div>
+        <div :class="[prefixCls + '-tail']"><i></i></div>
     </div>
 </template>
 <script>
@@ -86,7 +86,7 @@
             },
             styles () {
                 return {
-                    width: `${1/this.total*100}%`
+                    // width: `${1/this.total*100}%`
                 };
             }
         },

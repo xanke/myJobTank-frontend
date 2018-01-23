@@ -29,12 +29,9 @@
                 <Icon v-else class="icon-upload" :type="icon"></Icon>
               <slot name="content"></slot>
             </div>
-
             <div class="ivu-upload-content error top" v-if="uploadError">
               <slot name="content-error"></slot>
             </div>
-
-
 
         </div>
         <slot name="tip"></slot>
@@ -188,7 +185,7 @@ export default {
     }
   },
   mounted() {
-    this.domWitdh =this.$refs.upload.clientWidth
+    this.domWitdh = this.$refs.upload.clientWidth
     // console.log(this.$refs.upload.clientWidth)
   },
   methods: {

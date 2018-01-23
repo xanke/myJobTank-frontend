@@ -20,22 +20,29 @@
                   <Icon type="chevron-right"></Icon>
                 </div>
                 <div class="number-info">
-                  <div class="btn-action btn-left">
-                     <Icon type="star"></Icon>
-                  </div>
-                  <div class="btn-action btn-right">
-                    <Icon type="thumbsdown"></Icon>
-                  </div>
-                  <div class="avatar"> 
-                  </div>
+
+
                   <h3 class="name">JOHN B. ABOLARIN</h3>
                   <p class="s_title">Machine Learning Engineer</p>
                   <p class="desc">+1 2174111001</p>
                   <p class="desc">jabolarin@comcast.net</p>
+
+
+                  <div class="number-info-action">
+
+                    <div class="btn-action btn-left">
+                      <Icon type="star"></Icon>
+                    </div>
+                    <div class="btn-action btn-right">
+                      <Icon type="thumbsdown"></Icon>
+                    </div>
+                  </div>
+
+
                 </div>
               </div>
               <div class="number-body">
-                
+
                 <Row :gutter="32">
                   <Col span="16">
                     <div class="number-desc-wrap">
@@ -87,7 +94,7 @@
                 </Row>
 
               </div>
-            </div>            
+            </div>
           </div>
         </div>
       </div>
@@ -100,7 +107,7 @@
       </a>
       <Page class="top-page" :total="40" size="small"></Page>
     </div>
-      
+
     <Row :gutter="32">
       <Col span="16">
         <div class="company-detail panel">
@@ -109,7 +116,7 @@
               <div  class="company-logo"></div>
             </div>
             <div class="company-name">
-              <h3 class="s_title">Starbucks</h3>
+              <h3 class="s_title">Company Name</h3>
               <h3 class="title">Machine Learning Engineer</h3>
               <p class="desc">0-2 years experience</p>
               <p class="desc">Bachelor’s degree</p>
@@ -209,7 +216,7 @@ export default {
     margin-bottom: 8px
   p
     color #101010
-  
+
 
 .number-detail
   .tags-wrap
@@ -222,44 +229,37 @@ export default {
       line-height: 18px
       padding 10px 15px
       border-radius 30px
+  .number-body
+    border-top 1px solid #E9E9E9
+    padding-top 20px
+    margin-top 10px
   .number-first
     padding 30px 0
     position: relative
+    max-width 600px
+    margin 0 auto
     >.btn-nav
       width 64px
       height 64px
       display inline-block
-      background #FFF
       position: absolute
       border-radius 100%
       text-align: center
       line-height: 64px
       font-size 30px
       color #CCC
-      box-shadow: 0 0 24px 0 #EEEEEE
       margin-top: -32px
       top 50%
       z-index:  100
       &.btn-right
         right 0px
-    
+
     .number-info
       margin 0 auto
       width 250px
       text-align: center
       position: relative
-      >.btn-action
-        border 1px solid color-main
-        width 32px
-        height 32px
-        color color-main
-        text-align: center
-        line-height 32px
-        border-radius 100%
-        position: absolute
-        top 30px
-        &.btn-right
-          right 0px
+
       .avatar
         display inline-block
         width 96px
@@ -268,14 +268,30 @@ export default {
         margin-bottom: 16px
         background #EEE
       .name
-        font-size 24px
+        font-size 26px
         color #101010
+        font-weight 500
       .s_title
         margin-bottom: 10px
         color #666
       .desc
         color #101010
-      
+
+      &-action
+        display flex
+        margin-top 10px
+        justify-content center
+        .btn-action
+          margin 0 10px
+          border 1px solid color-main
+          width 32px
+          height 32px
+          color color-main
+          text-align: center
+          line-height 32px
+          border-radius 100%
+
+
   .detail-top
     margin-top: 50px
     border-bottom: 1px solid #E9E9E9
@@ -303,7 +319,7 @@ export default {
   right 0px
   bottom 0px
   z-index: 1111
-  background rgba(255, 255, 255, .9)
+  background rgba(246, 248, 246, 1)
 
   .close
     width 48px
@@ -323,6 +339,7 @@ export default {
     .s_title
       font-size 20px
       color #999
+      font-weight 500
     .title
       color #101010
       font-size 20px
@@ -340,7 +357,7 @@ export default {
         height 64px
         background #999
         border-radius 100%
-  
+
   .company-desc-wrap
     margin-bottom: 32px
     .title
@@ -357,7 +374,7 @@ export default {
     font-size 24px
     color #666
     font-weight blod
-    
+
   .top-page
     float: right
 

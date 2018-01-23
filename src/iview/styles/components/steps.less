@@ -9,12 +9,16 @@
   font-size: 0;
   width: 100%;
   line-height: 1.5;
+  display: flex;
 
   &-item {
-    display: inline-block;
+    display: flex;
+    // display: inline-block;
     position: relative;
     vertical-align: top;
-
+    // justify-content: space-between;
+    padding-right: 10px;
+    flex: 1;
     //未完成
     &.@{steps-prefix-cls}-status-wait {
       .@{steps-prefix-cls}-head-inner {
@@ -37,6 +41,7 @@
     }
     //当前状态
     &.@{steps-prefix-cls}-status-process {
+
       .@{steps-prefix-cls}-head-inner {
         border-color: @primary-color;
         background-color: @primary-color;
@@ -58,11 +63,11 @@
     }
     &.@{steps-prefix-cls}-status-finish {
       .@{steps-prefix-cls}-head-inner {
-        background-color: #fff;
+        background-color: @primary-color;
         border-color: @primary-color;
         > .@{steps-prefix-cls}-icon,
         span {
-          color: @primary-color;
+          color: #FFF;
         }
       }
       .@{steps-prefix-cls}-tail > i:after {
@@ -136,7 +141,7 @@
     vertical-align: top;
   }
   .@{steps-prefix-cls}-head {
-    background: #fff;
+    background: initial;
   }
 
   //图标
@@ -177,12 +182,12 @@
   .@{steps-prefix-cls}-title {
     display: inline-block;
     margin-bottom: 4px;
-    padding-right: 45px;
+    padding-right: 5px;
     font-size: 16px;
 
     // font-weight: bold;
     color: #666;
-    background: #fff;
+    // background: #fff;
 
     > a:first-child:last-child {
       color: #666;
@@ -201,9 +206,8 @@
   .@{steps-prefix-cls}-tail {
     width: 100%;
     padding: 0 10px;
-    position: absolute;
-    left: 0;
-    top: 10px;
+    flex: 1;
+    margin-top: 12px;
     > i {
       display: inline-block;
       width: 100%;
@@ -364,8 +368,8 @@
     //max-width: 100px;
     padding-left: 35px;
   }
-  .@{steps-prefix-cls}-item:not(:first-child) .@{steps-prefix-cls}-head {
-    padding-left: 45px;
-    margin-left: -45px;
-  }
+  // .@{steps-prefix-cls}-item:not(:first-child) .@{steps-prefix-cls}-head {
+  //   padding-left: 45px;
+  //   // margin-left: -45px;
+  // }
 }

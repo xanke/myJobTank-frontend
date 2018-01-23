@@ -70,7 +70,7 @@ html, body {
 
 .main-header {
   height: 72px;
-  box-shadow: 0 0 4px 0 #EEEEEE;
+  box-shadow: 0 0 4px 0 rgba(0,0,0,.15);
 
   .container {
     padding: 0 15px;
@@ -108,14 +108,15 @@ html, body {
   margin: 0 auto;
 }
 
-.main {
+.main
   width: 100%;
   height: 100%;
-  background: #FFF;
+  background: rgb(246,248,246);
 
-  .inner {
+  .inner
     padding: 0 15px;
-  }
-}
+
+  input,.ivu-select-selection
+    background rgba(0,0,0,0)
+
 </style>
- 
