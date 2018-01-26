@@ -108,7 +108,7 @@
 
             <FormItem>
               <Checkbox v-model="form.WillingToTravel">
-                <span>Travel Requirement</span>
+                <span>Required</span>
               </Checkbox>
             </FormItem>
 
@@ -128,12 +128,6 @@
                 <Option :value="item" :key="index" v-for="(item, index) in selectName.salary_range_name">{{item}}</Option>
               </Select>
             </FormItem>
-            <FormItem label="Visa">
-              <Select v-model="form.Visa" placeholder="Visa">
-                <Option :value="item" :key="index" v-for="(item, index) in selectName.visa_arr">{{item}}</Option>
-              </Select>
-            </FormItem>
-
 
             <FormItem label="Language">
               <Tag v-for="(item, index) in form.Language" :key="item" :name="item" closable @on-close="removeItem('Language', index)">{{item}}</Tag>
@@ -179,14 +173,25 @@
               <Checkbox v-model="form.Allowance">
                 <span>Travel / Meal /Housing Allowance</span>
               </Checkbox>
+              <Checkbox v-model="form.Health">
+                <span>Health</span>
+              </Checkbox>
+              <Checkbox v-model="form.Welness">
+                <span>Welness</span>
+              </Checkbox>
             </FormItem>
 
+            <FormItem label="Salary Range">
+              <Select placeholder="Salary Range" v-model="form.salaryRange">
+                <Option :value="item" :key="index" v-for="(item, index) in selectName.salary_range_name">{{item}}</Option>
+              </Select>
+            </FormItem>
 
-            <FormItem label="Compensation / Package">
+            <!-- <FormItem label="Compensation / Package">
               <Select placeholder="Compensation / Package" v-model="form.CompensationPackage">
                 <Option :value="item" :key="index" v-for="(item, index) in selectName.compensation_arr">{{item}}</Option>
               </Select>
-            </FormItem>
+            </FormItem> -->
 
 
           </Form>

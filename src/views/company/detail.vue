@@ -20,16 +20,12 @@
                   <Icon type="chevron-right"></Icon>
                 </div>
                 <div class="number-info">
-
-
                   <h3 class="name">JOHN B. ABOLARIN</h3>
                   <p class="s_title">Machine Learning Engineer</p>
                   <p class="desc">+1 2174111001</p>
                   <p class="desc">jabolarin@comcast.net</p>
 
-
                   <div class="number-info-action">
-
                     <div class="btn-action btn-left">
                       <Icon type="star"></Icon>
                     </div>
@@ -136,11 +132,100 @@
 
           <div class="company-desc-wrap">
             <h3 class="title">Key Responsibilities </h3>
-            <p>1.  Knowledge of data structures, algorithms and computer science concepts relative to the platform.</p>
-            <p>2.  Proficiency in development languages, tools, frameworks, utilities and technical dependencies. </p>
-            <p>3.  Ability to write and value high quality, reusable software with minimal defects. Ability to learn and incorporate new technologies, concepts and development languages. </p>
-            <p>4.  Ability to absorb new concepts and technical implementation of application architecture, infrastructure and security. </p>
+            <div class="desc-item">
+              <div class="desc-item__dot">
+                <span class="icon">1</span>
+              </div>
+              <p class="desc-item__text">Knowledge of data structures, algorithms and computer science concepts relative to the platform.</p>
+            </div>
+            <div class="desc-item">
+              <div class="desc-item__dot">
+                <span class="icon">2</span>
+              </div>
+              <p class="desc-item__text">Proficiency in development languages, tools, frameworks, utilities and technical dependencies.</p>
+            </div>
+            <div class="desc-item">
+              <div class="desc-item__dot">
+                <span class="icon">3</span>
+              </div>
+              <p class="desc-item__text">Ability to write and value high quality, reusable software with minimal defects. Ability to learn and incorporate new technologies, concepts and development languages.</p>
+            </div>
+            <div class="desc-item">
+              <div class="desc-item__dot">
+                <span class="icon">4</span>
+              </div>
+              <p class="desc-item__text">Ability to absorb new concepts and technical implementation of application architecture, infrastructure and security.</p>
+            </div>
           </div>
+
+          <div class="company-desc-wrap">
+            <h3 class="title">Required Skills</h3>
+
+            <div class="required-box">
+              <h4 class="required-box__title">Langeuage</h4>
+              <div class="required-box__bd">
+                <span class="required-box__item">English</span>
+              </div>
+            </div>
+            <div class="required-box">
+              <h4 class="required-box__title">Require Skills</h4>
+              <div class="required-box__bd">
+                <span class="required-box__item">Python</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="company-desc-wrap">
+            <h3 class="title">Compensation</h3>
+
+            <div class="required-box">
+              <h4 class="required-box__title">Salary Range</h4>
+              <div class="required-box__bd">
+                <span class="required-box__item">100,000 - 150,000</span>
+              </div>
+            </div>
+            <div class="required-box">
+              <h4 class="required-box__title">Require Skills</h4>
+              <div class="required-box__bd">
+                <span class="required-box__item">Python</span>
+              </div>
+              <div class="required-box__bd">
+                <span class="required-box__item--check">
+                  <Icon class="icon" type="checkmark"></Icon>Option
+                </span>
+                <span class="required-box__item--check">
+                  <Icon class="icon" type="checkmark"></Icon>Commissions
+                </span>
+                <span class="required-box__item--check">
+                  <Icon class="icon" type="checkmark"></Icon>Overtime Pay
+                </span>
+                <span class="required-box__item--check">
+                  <Icon class="icon" type="checkmark"></Icon>Bonuses
+                </span>
+                <span class="required-box__item--check">
+                  <Icon class="icon" type="checkmark"></Icon>Travel / Meal / Housing Allowance
+                </span>
+              </div>
+            </div>
+            <div class="required-box">
+              <h4 class="required-box__title">Benefits</h4>
+              <div class="required-box__bd">
+                <div class="desc-item">
+                  <div class="desc-item__dot">
+                    <span class="icon">1</span>
+                  </div>
+                  <p class="desc-item__text">Ensures solutions are secure, durable, scalable, flexible, and accessible. Proactively mitigates against production support issues.</p>
+                </div>
+                <div class="desc-item">
+                  <div class="desc-item__dot">
+                    <span class="icon">2</span>
+                  </div>
+                  <p class="desc-item__text">Learning to build incrementally, with an eye toward vision of the final product. Assists in prototypes with innovative ideas for complex problems.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </Col>
       <Col span="8">
@@ -157,7 +242,7 @@
 </template>
 
 <script type="text-/ecmascript-6">
-import numberItem from "@/components/company/numberItem"
+import numberItem from '@/components/company/numberItem'
 
 export default {
   props: {},
@@ -166,9 +251,7 @@ export default {
       showNumber: false
     }
   },
-  mounted() {
-
-  },
+  mounted() {},
   computed: {},
   components: {
     numberItem
@@ -179,7 +262,6 @@ export default {
       console.log('1')
       this.showNumber = true
     }
-
   },
   created() {}
 }
@@ -193,6 +275,8 @@ export default {
   padding-left: 30px
   position: relative
   margin-bottom: 24px
+
+
   .title-icon
     position: absolute
     vertical-align: top
@@ -216,6 +300,57 @@ export default {
     margin-bottom: 8px
   p
     color #101010
+
+
+  // .required-item
+.desc-item
+  display flex
+  border-bottom 1px solid #EEE
+  padding 10px 0
+  &__dot
+    width 20px
+    margin-right 10px
+    .icon
+      width 20px
+      height 20px
+      background #CCC
+      text-align center
+      line-height 20px
+      display inline-block
+      border-radius 100%
+      color #FFF
+  &__text
+    color #333
+    font-size 14px
+
+
+
+.required-box
+  padding 10px 0
+  &__title
+    color #666
+    font-weight 500
+
+  &__bd
+    padding 10px 0
+  &__item
+    color #000
+    line-height 32px
+    display inline-block
+    padding 0 25px
+    border-radius 16px
+    background rgba(color-main,.1)
+  &__item--check
+    line-height 32px
+    font-size 16px
+    color #000
+    min-width 200px
+    display inline-block
+    margin-bottom 10px
+    .icon
+      color color-main
+      margin-right 10px
+
 
 
 .number-detail
@@ -290,6 +425,12 @@ export default {
           text-align: center
           line-height 32px
           border-radius 100%
+          cursor pointer
+          &:hover
+            background rgba(color-main, .1)
+          &:active
+            background color-main
+            color #FFF
 
 
   .detail-top

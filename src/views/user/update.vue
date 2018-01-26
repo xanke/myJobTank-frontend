@@ -101,7 +101,7 @@
 						<Row :gutter="20">
 							<Col span="16">
 								<span class="step-desc">
-									<Icon class="icon-form-help" type="help" size="14"></Icon>Why s2ubmit your resume to us?
+									<Icon class="icon-form-help" type="help" size="14"></Icon>Why submit your resume to us?
 									<p class="desc">
 										•   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By submitting your resume to us, you create a profile in our database. Our recruiters will come across your resume during their search and offer possible internal referral job opportunities in well-known companies.
 										<br />•   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By submitting your resume to us, you will get a free one time resume enhancement session to help you create a perfect resume and land your dream job.
@@ -200,6 +200,10 @@
 								<Row :gutter="0">
 									<Col span="16">
 										<div class="item-form" :key="index" v-for="(item, index) in formUpdate.Education">
+                      <span v-if="index > 0" class="item-form__del" @click="removeItem('Education', index)">
+                        <Icon type="wl-close"></Icon>
+                      </span>
+
 											<Row :gutter="65">
 												<Col span="12">
 													<FormItem :cube-input="true" label="Institution">
@@ -254,6 +258,9 @@
 								<Row :gutter="0">
 									<Col span="16">
 										<div class="item-form" :key="index" v-for="(item, index) in formUpdate.Employment">
+                      <span v-if="index > 0" class="item-form__del" @click="removeItem('Employment', index)">
+                        <Icon type="wl-close"></Icon>
+                      </span>
 											<Row :gutter="65">
 												<Col span="12">
 													<FormItem :cube-input="true" label="Employer">
@@ -268,7 +275,7 @@
 													</FormItem>
 												</Col>
 												<Col span="12">
-													<FormItem :cube-input="true" label="Job Position">
+													<FormItem :cube-input="true" label="Expectation">
 														<Input :clear-btn="true" v-model="item.Position" placeholder="Job Position"></Input>
 													</FormItem>
 												</Col>
@@ -304,7 +311,7 @@
                               {{item.name}}
                             </span>
                             <span class="del" @click="removeItem('skills', index)">
-                            <Icon type="wl-close"></Icon>
+                              <Icon type="wl-close"></Icon>
                             </span>
                           </div>
 													<Rate :circle="true" :count="10" v-model="item.rank"></Rate>
@@ -417,6 +424,9 @@
 								<Row :gutter="0">
 									<Col span="16">
 										<div class="item-form" :key="index" v-for="(item, index) in formUpdate.Patent">
+                      <span v-if="index > 0" class="item-form__del" @click="removeItem('Patent', index)">
+                        <Icon type="wl-close"></Icon>
+                      </span>
 											<FormItem :cube-input="true" label="Patent Name">
 												<Input :clear-btn="true" v-model="item.name" placeholder="Patent Name"></Input>
 											</FormItem>
@@ -441,6 +451,9 @@
 								<Row :gutter="0">
 									<Col span="16">
 										<div class="item-form" :key="index" v-for="(item, index) in formUpdate.Publication">
+                      <span v-if="index > 0" class="item-form__del" @click="removeItem('Publication', index)">
+                        <Icon type="wl-close"></Icon>
+                      </span>
 											<FormItem :cube-input="true" label="Conference / Journal Name">
 												<Input :clear-btn="true" v-model="item.name" placeholder="Conference / Journal Name"></Input>
 											</FormItem>
@@ -465,6 +478,9 @@
 								<Row :gutter="0">
 									<Col span="16">
 										<div class="item-form" :key="index" v-for="(item, index) in formUpdate.License">
+                      <span v-if="index > 0" class="item-form__del" @click="removeItem('License', index)">
+                        <Icon type="wl-close"></Icon>
+                      </span>
 											<FormItem :cube-input="true" label="Name">
 												<Input :clear-btn="true" v-model="item.name" placeholder="Name"></Input>
 											</FormItem>
@@ -834,11 +850,25 @@ primary-color = #E36D01; // #2d8cf0;
     .group-item {
       position: relative;
       // &:
-
       .item-form {
         padding: 24px;
         border: 1px dashed #CCCCCC;
         margin-bottom: 24px;
+        position: relative;
+
+        &__del{
+          position: absolute;
+          right: 5px;
+          top: 0px;
+          cursor: pointer;
+          color #999;
+          &:hover{
+            color: #333;
+          }
+          .ivu-icon{
+            font-size: 12px;
+          }
+        }
       }
 
       .item-btn {
@@ -898,6 +928,7 @@ primary-color = #E36D01; // #2d8cf0;
 
 .skill-item {
   position: relative;
+  margin-bottom:20px;
   .del{
     position: absolute;
     right: 5px;
@@ -914,6 +945,7 @@ primary-color = #E36D01; // #2d8cf0;
   .skill_hd{
     border-bottom: 1px solid #EEE;
     padding-bottom: 8px;
+    height:25px;
     .title{
       color: #999;
     }

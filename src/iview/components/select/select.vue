@@ -556,6 +556,7 @@
             },
             resetScrollTop () {
                 const index = this.focusIndex - 1;
+                console.log(index)
                 let bottomOverflowDistance = this.optionInstances[index].$el.getBoundingClientRect().bottom - this.$refs.dropdown.$el.getBoundingClientRect().bottom;
                 let topOverflowDistance = this.optionInstances[index].$el.getBoundingClientRect().top - this.$refs.dropdown.$el.getBoundingClientRect().top;
 
