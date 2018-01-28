@@ -1,6 +1,6 @@
 <template>
   <div class="panel panel-company-item">
-    <a href="" class="panel-body">
+    <a href="#/dashboard/joborder/1" target="blank" class="panel-body">
       <div class="company-logo">
         <img src="" alt="" class="logo">
       </div>
@@ -15,7 +15,7 @@
     <div class="panel-footer">
       <p class="desc">16M ago</p>
       <div class="btn-group">
-        
+
         <a href="" class="btn-action">
           <Icon class="btn-icon" type="edit"></Icon>
         </a>
@@ -55,7 +55,7 @@ export default {
   padding 30px
   padding-bottom 20px
   padding-right: 20px
-  
+
   .btn-group
     text-align: right
     .btn-action

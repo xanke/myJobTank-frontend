@@ -97,7 +97,7 @@
     </transition>
     <div class="main-top">
       <a class="back">
-        <router-link to="/company">
+        <router-link to="/dashboard">
           < Positions
         </router-link>
       </a>
@@ -178,17 +178,20 @@
           <div class="company-desc-wrap">
             <h3 class="title">Compensation</h3>
 
-            <div class="required-box">
-              <h4 class="required-box__title">Salary Range</h4>
-              <div class="required-box__bd">
-                <span class="required-box__item">100,000 - 150,000</span>
+              <div class="required-box">
+                <h4 class="required-box__title">Salary Range</h4>
+                <div class="required-box__bd">
+                  <span class="required-box__item">100,000 - 150,000</span>
+                </div>
               </div>
-            </div>
+
             <div class="required-box">
-              <h4 class="required-box__title">Require Skills</h4>
-              <div class="required-box__bd">
-                <span class="required-box__item">Python</span>
-              </div>
+
+
+
+
+              <h4 class="required-box__title">Benefits</h4>
+
               <div class="required-box__bd">
                 <span class="required-box__item--check">
                   <Icon class="icon" type="checkmark"></Icon>Option
@@ -206,23 +209,7 @@
                   <Icon class="icon" type="checkmark"></Icon>Travel / Meal / Housing Allowance
                 </span>
               </div>
-            </div>
-            <div class="required-box">
-              <h4 class="required-box__title">Benefits</h4>
-              <div class="required-box__bd">
-                <div class="desc-item">
-                  <div class="desc-item__dot">
-                    <span class="icon">1</span>
-                  </div>
-                  <p class="desc-item__text">Ensures solutions are secure, durable, scalable, flexible, and accessible. Proactively mitigates against production support issues.</p>
-                </div>
-                <div class="desc-item">
-                  <div class="desc-item__dot">
-                    <span class="icon">2</span>
-                  </div>
-                  <p class="desc-item__text">Learning to build incrementally, with an eye toward vision of the final product. Assists in prototypes with innovative ideas for complex problems.</p>
-                </div>
-              </div>
+
             </div>
           </div>
 

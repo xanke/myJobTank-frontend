@@ -6,7 +6,7 @@ export const otherRouter = {
   children: [
     {
       path: '/',
-      redirect: 'update/1'
+      redirect: 'resume_upload/upload'
     }
   ]
 }
@@ -22,23 +22,23 @@ export const appRouter = {
   component: Main,
   children: [
     {
-      path: 'update/:step',
+      path: 'resume_upload/:step',
       title: '新简历',
-      name: 'update',
+      name: 'resume_upload',
       component: resolve => {
         require(['@/views/user/update.vue'], resolve)
       }
     },
     {
-      path: 'company/',
+      path: 'dashboard/',
       title: '所有公司',
-      name: 'company',
+      name: 'dashboard',
       component: resolve => {
         require(['@/views/company/index.vue'], resolve)
       }
     },
     {
-      path: 'company/:id',
+      path: 'dashboard/joborder/:id',
       title: '公司详情',
       name: 'company_detail',
       component: resolve => {

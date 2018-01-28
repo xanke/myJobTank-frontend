@@ -8,7 +8,7 @@
 				<Step title="Submit"></Step>
 			</Steps>
       <!-- 第一步开始 -->
-			<div class="step-form" v-if="step == 0">
+			<div class="step-form" v-if="step == 'upload'">
 				<Form ref="formUpdate" :model="formUpdate" :rules="ruleUpdate" label-position="top">
           <Row :gutter="20" style="display:flex;justify-content:left;">
             <Col span="8">
@@ -116,7 +116,7 @@
 				</Form>
 			</div>
       <!-- 第二步开始 -->
-			<div class="step-form" v-if="step == 1">
+			<div class="step-form" v-if="step == 'analyze'">
 				<Form>
           <!-- 基本资料开始 -->
 					<div class="form-group">
@@ -184,11 +184,13 @@
 								</FormItem>
 							</Col>
 							<Col span="8">
-								<FormItem :cube-input="true"  >
-									<Select v-model="formUpdate.Visa" placeholder="Visa">
-										<Option :value="item" :key="index" v-for="(item, index) in selectName.visa_arr">{{item}}</Option>
-									</Select>
-								</FormItem>
+
+                <FormItem  :cube-input="true" >
+                  <Select v-model="formUpdate.Status">
+                    <Option :value="item" :key="index" v-for="(item, index) in selectName.update_status_name">{{item}}</Option>
+                  </Select>
+                </FormItem>
+
 							</Col>
 						</Row>
 					</div>
@@ -207,13 +209,18 @@
 											<Row :gutter="65">
 												<Col span="12">
 													<FormItem :cube-input="true" label="Institution">
-														<Input :clear-btn="true" v-model="item.Institution" placeholder="Institution"></Input>
+                            <AutoComplete
+                              v-model="item.Institution"
+                              :data="selectName.institution_arr"
+                              :filter-method="autoComplete"
+                              placeholder="Institution"
+                              >
+                            </AutoComplete>
 													</FormItem>
 												</Col>
 												<Col span="12">
 													<FormItem :cube-input="true" label="Major">
                             <AutoComplete
-                              :clear-btn="true"
                               v-model="item.Major"
                               :data="selectName.major_arr"
                               :filter-method="autoComplete"
@@ -235,7 +242,7 @@
 												</Col>
 												<Col span="12">
 													<FormItem :cube-input="true" label="Gratuation Year">
-                            <Input type="birthday" formatView="YYYY" :clear-btn="true" v-model="item.Date" placeholder="YYYY"></Input>
+                            <Input type="birthday" formatView="YYYY"  v-model="item.Date" placeholder="YYYY"></Input>
 													</FormItem>
 												</Col>
 											</Row>
@@ -264,7 +271,7 @@
 											<Row :gutter="65">
 												<Col span="12">
 													<FormItem :cube-input="true" label="Employer">
-														<Input :clear-btn="true" v-model="item.Employer" placeholder="Employer"></Input>
+														<Input  v-model="item.Employer" placeholder="Employer"></Input>
 													</FormItem>
 												</Col>
 												<Col span="12">
@@ -275,8 +282,8 @@
 													</FormItem>
 												</Col>
 												<Col span="12">
-													<FormItem :cube-input="true" label="Expectation">
-														<Input :clear-btn="true" v-model="item.Position" placeholder="Job Position"></Input>
+													<FormItem :cube-input="true" label="Job Position">
+														<Input  v-model="item.Position" placeholder="Job Position"></Input>
 													</FormItem>
 												</Col>
 												<Col span="12">
@@ -331,7 +338,7 @@
                   placeholder="Add Skills"
                   style="width:200px">
                 </AutoComplete>
-                <Button type="primary" @click="handleAddTags('skills')">Add</Button>
+                <Button type="primary" :disabled="!addTag.skills" @click="handleAddTags('skills')">Add</Button>
               </FormItem>
 						</div>
 					</div>
@@ -370,13 +377,13 @@
                   placeholder="Add Language"
                   style="width:200px">
                 </AutoComplete>
-                <Button type="primary" @click="handleAddTags('language')">Add</Button>
+                <Button type="primary" :disabled="!addTag.language" @click="handleAddTags('language')">Add</Button>
               </FormItem>
 						</div>
 					</div>
           <!-- 工作经历开始 -->
 					<div class="form-group">
-						<p class="group-title">Employment History</p>
+						<p class="group-title">Expectation</p>
 						<div class="form-group-child">
 							<div class="group-item">
 								<Row :gutter="65">
@@ -395,8 +402,8 @@
                       </AutoComplete>
 										</FormItem>
 										<FormItem>
-                      <Select placeholder="status" v-model="formUpdate.status">
-                        <Option :value="item" :key="index" v-for="(item, index) in selectName.update_status_name">{{item}}</Option>
+                      <Select placeholder="Visa Status" v-model="formUpdate.status">
+                        <Option :value="item" :key="index" v-for="(item, index) in selectName.vist_status">{{item}}</Option>
                       </Select>
 										</FormItem>
 									</Col>
@@ -428,16 +435,16 @@
                         <Icon type="wl-close"></Icon>
                       </span>
 											<FormItem :cube-input="true" label="Patent Name">
-												<Input :clear-btn="true" v-model="item.name" placeholder="Patent Name"></Input>
+												<Input  v-model="item.name" placeholder="Patent Name"></Input>
 											</FormItem>
 											<FormItem :cube-input="true" label="Date">
-												<Input type="birthday" formatView="MM/DD/YYYY" :clear-btn="true" v-model="item.date" placeholder="MM/DD/YYYY"></Input>
+												<Input type="birthday" formatView="MM/DD/YYYY" v-model="item.date" placeholder="MM/DD/YYYY"></Input>
 											</FormItem>
 										</div>
 									</Col>
 									<Col span="8" class="item-btn">
 										<div>
-											<a class="btn-add-item" @click="addAttribute('Patent')">+ Add Attribute</a>
+											<a class="btn-add-item"  @click="addAttribute('Patent')">+ Add Attribute</a>
 										</div>
 									</Col>
 								</Row>
@@ -455,10 +462,10 @@
                         <Icon type="wl-close"></Icon>
                       </span>
 											<FormItem :cube-input="true" label="Conference / Journal Name">
-												<Input :clear-btn="true" v-model="item.name" placeholder="Conference / Journal Name"></Input>
+												<Input  v-model="item.name" placeholder="Conference / Journal Name"></Input>
 											</FormItem>
 											<FormItem :cube-input="true" label="Date">
-												<Input type="birthday" formatView="MM/DD/YYYY" :clear-btn="true" v-model="item.date" placeholder="MM/DD/YYYY"></Input>
+												<Input type="birthday" formatView="MM/DD/YYYY"  v-model="item.date" placeholder="MM/DD/YYYY"></Input>
 											</FormItem>
 										</div>
 									</Col>
@@ -482,10 +489,10 @@
                         <Icon type="wl-close"></Icon>
                       </span>
 											<FormItem :cube-input="true" label="Name">
-												<Input :clear-btn="true" v-model="item.name" placeholder="Name"></Input>
+												<Input  v-model="item.name" placeholder="Name"></Input>
 											</FormItem>
 											<FormItem :cube-input="true" label="Date">
-												<Input type="birthday" formatView="MM/DD/YYYY" :clear-btn="true" v-model="item.date" placeholder="MM/DD/YYYY"></Input>
+												<Input type="birthday" formatView="MM/DD/YYYY"  v-model="item.date" placeholder="MM/DD/YYYY"></Input>
 											</FormItem>
 										</div>
 									</Col>
@@ -504,7 +511,7 @@
 				</Form>
 			</div>
 			<!-- 第二步结束 -->
-			<div class="step-form" v-if="step == 2">
+			<div class="step-form" v-if="step == 'submit'">
 				<div class="step-finish">
 					<i class="icon-finish">
 
@@ -679,29 +686,38 @@ export default {
   },
   computed: {
     step() {
-      return this.$route.params.step - 1
+      return this.$route.params.step
     }
   },
   watch: {
     'formUpdate.Mobile': function(val) {
       setTimeout(() => {
-        this.formUpdate.Mobile = val.replace(/[^\d^\+]/g, '')
+        this.formUpdate.Mobile = val.replace(/[^\d^\+-]/g, '')
       }, 0)
     },
     'formUpdate.Name': function(val) {
       setTimeout(() => {
         this.formUpdate.Name = val.replace(/[\d]/g, '')
       }, 0)
-    }
+    },
+    'formUpdate.Mobile': function(val) {
+      setTimeout(() => {
+        this.formUpdate.Mobile = val.replace(/[^\d^\+-]/g, '')
+      }, 0)
+    },
+
+
   },
   created() {
     getUpdateUrl().then(
       res => {
+        console.log(res)
         let { Data } = res.data
         this.updateUrl = Data.url
         this.formUpdate.FileId = Data.fileId
       },
       err => {
+        console.log(err)
         this.$Message.error('Network error')
       }
     )
@@ -761,7 +777,7 @@ export default {
               let { Data, ErrCode } = res.data
               if (ErrCode === 2000) {
                 this.$router.push({
-                  path: '/update/2'
+                  path: '/resume_upload/anglyze'
                 })
               }
             },
@@ -858,12 +874,22 @@ primary-color = #E36D01; // #2d8cf0;
 
         &__del{
           position: absolute;
-          right: 5px;
+          right: 0px;
           top: 0px;
           cursor: pointer;
-          color #999;
+          color color-main;
+          background #CCC;
+          color #FFF;
+          border-radius 0 0 0 100%
+          width 20px
+          height 20px
+          text-align center
+          font-size 12px
+          line-height 20px
+          padding-left 5px
           &:hover{
-            color: #333;
+            background primary-color
+            color: #FFF;
           }
           .ivu-icon{
             font-size: 12px;

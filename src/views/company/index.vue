@@ -34,9 +34,7 @@
         </div>
         <Row :gutter="18" class="company-list">
           <Col :span="6" :key="index" v-for="(item, index) in [1,2,3,4,5,6]">
-            <router-link to="company/1">
               <company-item></company-item>
-            </router-link>
           </Col>
         </Row>
         <div class="page-wrap">
@@ -104,11 +102,9 @@
               </AutoComplete>
             </FormItem>
 
-
-
             <FormItem>
               <Checkbox v-model="form.WillingToTravel">
-                <span>Required</span>
+                <span>Travel Requirement</span>
               </Checkbox>
             </FormItem>
 
@@ -123,7 +119,7 @@
               </Select>
             </FormItem>
 
-            <FormItem label="Salary Range">
+            <FormItem label="Base Salary Range">
               <Select v-model="form.SalaryRange">
                 <Option :value="item" :key="index" v-for="(item, index) in selectName.salary_range_name">{{item}}</Option>
               </Select>
@@ -210,7 +206,7 @@ export default {
   data() {
     return {
       selectName,
-      addCompany: true,
+      addCompany: false,
       form: {
         CompanySize: '',
         Skills: ['Python'],
@@ -255,7 +251,9 @@ export default {
 
 <style lang="stylus">
 @import '../../assets/stylus/base.styl';
-
+.ivu-modal
+  .ivu-select-dropdown
+    top: 32px !important
 
 .btn-add-item {
   font-style: italic;
