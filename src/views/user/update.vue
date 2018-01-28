@@ -2,7 +2,7 @@
 <template>
 	<div class="main">
 		<div class="container inner">
-			<Steps class="update-step" :current="step">
+			<Steps class="update-step" :current="stepNum">
 				<Step title="Upload"></Step>
 				<Step title="Analyze & Review"></Step>
 				<Step title="Submit"></Step>
@@ -46,7 +46,7 @@
               <Col span="8">
                 <FormItem label="Preferred Location" prop="PreferredLocation">
                   <AutoComplete
-                    v-model="formUpdate.PreferredLocation"
+                    v-model="formUpdate.PreferredLocations"
                     :data="selectName.city_arr"
                     :filter-method="autoComplete"
                     placeholder="Preferred Location"
@@ -561,6 +561,7 @@ export default {
         Mobile: '',
         SalaryRange: '',
         PreferredLocation: '',
+        PreferredLocations: '',
         Status: '',
         AcceptRelocation: false,
         WillingToTravel: false,
@@ -687,6 +688,16 @@ export default {
   computed: {
     step() {
       return this.$route.params.step
+    },
+    stepNum() {
+      let step = this.$route.params.step
+      if (step === 'upload') {
+        return 0
+      } else if (step === 'analyze') {
+        return 1
+      } else if (step === 'submit') {
+        return 2
+      }
     }
   },
   watch: {
@@ -698,6 +709,11 @@ export default {
     'formUpdate.Name': function(val) {
       setTimeout(() => {
         this.formUpdate.Name = val.replace(/[\d]/g, '')
+      }, 0)
+    },
+    'formUpdate.PreferredLocations': function(val) {
+      setTimeout(() => {
+        this.formUpdate.PreferredLocations = val.replace(/[\d]/g, '')
       }, 0)
     },
     'formUpdate.Mobile': function(val) {

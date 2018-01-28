@@ -222,8 +222,11 @@ export default {
       this.progressTimer = 0
 
       this.progressTimer = setInterval(() => {
+        if (this.progress === 99) {
+          clearInterval(this.progressTimer)
+        }
         this.progress++
-      }, 50)
+      }, 80)
 
       if (!this.beforeUpload) {
         return this.post(file)

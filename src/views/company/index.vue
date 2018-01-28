@@ -153,26 +153,26 @@
             </FormItem>
 
             <FormItem label="Compesnsation">
-              <Checkbox v-model="form.Option">
+              <Checkbox style="margin-bottom:10px" v-model="form.Option">
                 <span>Option</span>
               </Checkbox>
-              <Checkbox v-model="form.Commissions">
+              <Checkbox style="margin-bottom:10px" v-model="form.Commissions">
                 <span>Commissions</span>
               </Checkbox>
-              <Checkbox v-model="form.Overtime">
+              <Checkbox style="margin-bottom:10px" v-model="form.Overtime">
                 <span>Overtime Pay</span>
               </Checkbox>
               <br />
-              <Checkbox v-model="form.Bonuses">
+              <Checkbox style="margin-bottom:10px" v-model="form.Bonuses">
                 <span>Bonuses</span>
               </Checkbox>
-              <Checkbox v-model="form.Allowance">
+              <Checkbox style="margin-bottom:10px" v-model="form.Allowance">
                 <span>Travel / Meal /Housing Allowance</span>
               </Checkbox>
-              <Checkbox v-model="form.Health">
+              <Checkbox style="margin-bottom:10px" v-model="form.Health">
                 <span>Health</span>
               </Checkbox>
-              <Checkbox v-model="form.Welness">
+              <Checkbox style="margin-bottom:10px" v-model="form.Welness">
                 <span>Welness</span>
               </Checkbox>
             </FormItem>
@@ -208,6 +208,7 @@ export default {
       selectName,
       addCompany: false,
       form: {
+        Name: '',
         CompanySize: '',
         Skills: ['Python'],
         Language: ['Englist']
@@ -225,6 +226,11 @@ export default {
     'form.CompanySize': function(val) {
       setTimeout(() => {
         this.form.CompanySize = val.replace(/[^\d^\+]/g, '')
+      }, 0)
+    },
+    'form.Name': function(val) {
+      setTimeout(() => {
+        this.form.Name = val.replace(/[\d]/g, '')
       }, 0)
     }
   },
