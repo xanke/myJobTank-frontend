@@ -46,7 +46,7 @@
               <Col span="8">
                 <FormItem label="Preferred Location" prop="PreferredLocation">
                   <AutoComplete
-                    v-model="formUpdate.PreferredLocations"
+                    v-model="formUpdate.PreferredLocation"
                     :data="selectName.city_arr"
                     :filter-method="autoComplete"
                     placeholder="Preferred Location"
@@ -168,7 +168,7 @@
 							<Col span="8">
 								<FormItem :cube-input="true" label="Current Location">
                   <AutoComplete
-                    v-model="formUpdate.PreferredLocation"
+                    v-model="formUpdate.PreferredLocation__2"
                     :data="selectName.city_arr"
                     :filter-method="autoComplete"
                     placeholder="Preferred Location"
@@ -338,7 +338,7 @@
                   placeholder="Add Skills"
                   style="width:200px">
                 </AutoComplete>
-                <Button type="primary" :disabled="!addTag.skills" @click="handleAddTags('skills')">Add</Button>
+                <Button type="primary" :disabled="!addTag.skills" @click="handleAddTags('skills')" class="btn--addtag">Add</Button>
               </FormItem>
 						</div>
 					</div>
@@ -377,7 +377,7 @@
                   placeholder="Add Language"
                   style="width:200px">
                 </AutoComplete>
-                <Button type="primary" :disabled="!addTag.language" @click="handleAddTags('language')">Add</Button>
+                <Button type="primary" :disabled="!addTag.language" @click="handleAddTags('language')" class="btn--addtag">Add</Button>
               </FormItem>
 						</div>
 					</div>
@@ -561,7 +561,7 @@ export default {
         Mobile: '',
         SalaryRange: '',
         PreferredLocation: '',
-        PreferredLocations: '',
+        PreferredLocation__2: '',
         Status: '',
         AcceptRelocation: false,
         WillingToTravel: false,
@@ -653,6 +653,13 @@ export default {
             trigger: 'change'
           }
         ],
+        PreferredLocation__2: [
+          {
+            required: true,
+            message: 'Preferred Location cannot be empty',
+            trigger: 'change'
+          }
+        ],
         SalaryRange: [
           {
             required: true,
@@ -711,9 +718,14 @@ export default {
         this.formUpdate.Name = val.replace(/[\d]/g, '')
       }, 0)
     },
-    'formUpdate.PreferredLocations': function(val) {
+    'formUpdate.PreferredLocation': function(val) {
       setTimeout(() => {
-        this.formUpdate.PreferredLocations = val.replace(/[\d]/g, '')
+        this.formUpdate.PreferredLocation = val.replace(/[\d]/g, '')
+      }, 0)
+    },
+    'formUpdate.PreferredLocation__2': function(val) {
+      setTimeout(() => {
+        this.formUpdate.PreferredLocation = val.replace(/[\d]/g, '')
       }, 0)
     },
     'formUpdate.Mobile': function(val) {
@@ -793,7 +805,7 @@ export default {
               let { Data, ErrCode } = res.data
               if (ErrCode === 2000) {
                 this.$router.push({
-                  path: '/resume_upload/anglyze'
+                  path: '/resume_upload/analyze'
                 })
               }
             },
@@ -831,7 +843,6 @@ primary-color = #E36D01; // #2d8cf0;
 
   .step-desc {
     line-height: 24px;
-
     .desc {
       color: #000;
       margin-top: 10px;
@@ -859,7 +870,9 @@ primary-color = #E36D01; // #2d8cf0;
     margin-right: 10px;
   }
 }
-
+.btn--addtag{
+  margin-left: 10px;
+}
 .form-group {
   margin-bottom: 30px;
 
