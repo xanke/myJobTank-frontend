@@ -71,7 +71,7 @@ html, body {
 .main-header {
   height: 72px;
   box-shadow: 0 0 4px 0 rgba(0,0,0,.15);
-
+  background: #FFF;
   .container {
     padding: 0 15px;
   }

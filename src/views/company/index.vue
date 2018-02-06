@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray">
+  <div class="container">
     <div class="container container-dash">
       <div class="panel-dashboard panel">
         <div class="dash-list">
