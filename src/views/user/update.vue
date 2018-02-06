@@ -789,6 +789,7 @@ export default {
         name: this.addTag[type],
         rank: 1
       })
+      this.addTag[type] = ''
     },
     handleUpdate() {
       this.$refs.formUpdate.validate(valid => {
