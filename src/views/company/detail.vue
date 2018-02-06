@@ -119,16 +119,11 @@
             </div>
           </div>
           <div class="company-desc-wrap">
-            <h3 class="title">About</h3>
+            <h3 class="title">About Summary</h3>
             <p>Starbucks Corporation is an American coffee company and coffeehouse chain. Starbucks was founded in Seattle, Washington in 1971. As of November 2016, it operates 23,768 locations worldwide.</p>
             <p>Starbucks is considered the main representative of "second wave coffee", initially distinguishing itself from other coffee-serving venues in the US by taste, quality, and customer experience while popularizing darkly roasted coffee.Β] Since the 2000s, third wave coffee makers have targeted quality-minded coffee drinkers with hand-made coffee based on lighter roasts, while Starbucks nowadays uses automated espresso machines for efficiency and safety reasons.</p>
           </div>
 
-          <div class="company-desc-wrap">
-            <h3 class="title">Summary and Mission</h3>
-            <p>Starbucks Corporation is an American coffee company and coffeehouse chain. Starbucks was founded in Seattle, Washington in 1971. As of November 2016, it operates 23,768 locations worldwide.</p>
-            <p>Starbucks is considered the main representative of "second wave coffee", initially distinguishing itself from other coffee-serving venues in the US by taste, quality, and customer experience while popularizing darkly roasted coffee.Β] Since the 2000s, third wave coffee makers have targeted quality-minded coffee drinkers with hand-made coffee based on lighter roasts, while Starbucks nowadays uses automated espresso machines for efficiency and safety reasons.</p>
-          </div>
 
           <div class="company-desc-wrap">
             <h3 class="title">Key Responsibilities </h3>
@@ -246,7 +241,6 @@ export default {
   filters: {},
   methods: {
     openNumber() {
-      console.log('1')
       this.showNumber = true
     }
   },
@@ -287,7 +281,6 @@ export default {
     margin-bottom: 8px
   p
     color #101010
-
 
   // .required-item
 .desc-item
@@ -337,8 +330,6 @@ export default {
     .icon
       color color-main
       margin-right 10px
-
-
 
 .number-detail
   .tags-wrap

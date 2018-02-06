@@ -112,6 +112,10 @@
               <Input v-model="form.Summary" type="textarea" placeholder="Summary"></Input>
             </FormItem>
 
+            <FormItem label="Key Responsibilities">
+              <Input v-model="form.KeyResponsibilities" type="textarea" placeholder="Key Responsibilities"></Input>
+            </FormItem>
+
 
             <FormItem label="Education">
               <Select placeholder="Education" v-model="form.Education ">
