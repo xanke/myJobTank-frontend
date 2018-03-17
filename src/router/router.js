@@ -6,21 +6,25 @@ export const otherRouter = {
   children: [
     {
       path: '/',
-      redirect: 'resume_upload/upload'
+      redirect: 'user/login'
     }
   ]
 }
 
-export const routerMap = [
-
-]
-
-
+export const routerMap = []
 
 export const appRouter = {
   path: '/',
   component: Main,
   children: [
+    {
+      path: 'user/login',
+      title: 'Login',
+      name: 'login',
+      component: resolve => {
+        require(['@/views/user/login.vue'], resolve)
+      }
+    },
     {
       path: 'resume_upload/:step',
       title: '新简历',

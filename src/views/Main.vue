@@ -3,10 +3,24 @@
   <div class="main">
     <div class="main-header">
       <div class="container">
-        <div class="header-logo">
-          <img class="logo-img" src="../images/logo.png">
-          <span class="logo-text">MY JOB TANK, INC.</span>
+        <div class="header__logo">
+          <img class="logo-text" src="../images/logo-text.png">
+          <!-- <span class="logo-text">MY JOB TANK, INC.</span> -->
         </div>
+
+        <div class="header__user">
+          <Dropdown>
+            <a href="javascript:void(0)">
+              <img class="avatar" src="../images/avatar.png" alt="">
+              <Icon type="chevron-down"></Icon>
+            </a>
+            <DropdownMenu slot="list">
+              <DropdownItem>
+                <Icon type="wl-logout"></Icon>Login out</DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+        </div>
+
       </div>
     </div>
     <router-view></router-view>
@@ -28,22 +42,24 @@ export default {
   },
   computed: {},
   methods: {
-    init() {}
+    init() { }
   },
   watch: {},
-  mounted() {},
-  created() {}
+  mounted() { },
+  created() { }
 }
 </script>
 
 <style lang="stylus">
 
-.bg-gray
-  background-color rgb(246, 248, 246)
+.bg-gray {
+  background-color: rgb(246, 248, 246);
+}
 
-.panel
-  background: #FFFFFF
-  box-shadow: 0 0 16px 0 #EEEEEE
+.panel {
+  background: #FFFFFF;
+  box-shadow: 0 0 16px 0 #EEEEEE;
+}
 
 @font-face {
   font-family: logo_font;
@@ -70,23 +86,68 @@ html, body {
 
 .main-header {
   height: 72px;
-  box-shadow: 0 0 4px 0 rgba(0,0,0,.15);
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.15);
   background: #FFF;
+
   .container {
     padding: 0 15px;
   }
-  .header-logo {
+
+  .header__user {
+    float: right;
+    margin-top: 15px;
+    color: #D8D8D8;
+
+    .avatar {
+      width: 38px;
+      height: 38px;
+    }
+
+    a .ivu-icon {
+      color: #D8D8D8;
+      font-size: 14px;
+      margin-left: 30px;
+      float: right;
+      line-height: 38px;
+    }
+
+    .ivu-select-dropdown {
+      border-radius: 4px;
+    }
+
+    .ivu-dropdown-item {
+      font-weight: 600;
+      padding: 0px;
+      line-height: 48px;
+      padding: 0 16px;
+
+      .ivu-icon {
+        line-height: 48px;
+        font-size: 20px;
+        margin-right: 10px;
+        float: left;
+      }
+    }
+  }
+
+  .header__logo {
     display: inline-block;
-    margin-top: 12px;
+
     .logo-img {
       width: 45px;
       height: 48px;
     }
+
+    .logo-text {
+      // width: 45px;
+      height: 48px;
+    }
+
     .logo-text {
       font-family: 'logo_font';
       font-size: 24px;
       vertical-align: top;
-      margin-top: 15px;
+      margin-top: 12px;
       display: inline-block;
     }
   }
@@ -108,15 +169,17 @@ html, body {
   margin: 0 auto;
 }
 
-.main
+.main {
   width: 100%;
   height: 100%;
-  background: rgb(246,248,246);
+  background: rgb(246, 248, 246);
 
-  .inner
+  .inner {
     padding: 0 15px;
+  }
 
-  input,.ivu-select-selection
-    background rgba(0,0,0,0)
-
+  input, .ivu-select-selection {
+    background: rgba(0, 0, 0, 0);
+  }
+}
 </style>
