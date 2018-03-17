@@ -6,7 +6,7 @@
   margin: 0 auto;
   margin-top: 100px;
   margin-bottom: 320px;
-  height: 360px;
+  // height: 360px;
   max-width: 360px;
   background: #FFF;
   border-radius: 12px;
@@ -87,7 +87,7 @@ export default {
         username: [
           {
             required: true,
-            message: 'Your enterprise Email',
+            message: 'Your can\'t leave this empty',
             trigger: 'blur'
           }
         ],
