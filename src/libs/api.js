@@ -10,3 +10,4 @@ export const getUpdateUrl = () => {
 export const resumeUpload = params => {
   return axios.post(`/jobtank/resume/upload`, params)
 }
+
