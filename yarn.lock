@@ -3464,8 +3464,8 @@ lodash.memoize@^4.1.2:
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
 
 lodash.mergewith@^4.6.0:
-  version "4.6.0"
-  resolved "https://registry.yarnpkg.com/lodash.mergewith/-/lodash.mergewith-4.6.0.tgz#150cf0a16791f5903b8891eab154609274bdea55"
+  version "4.6.2"
+  resolved "https://registry.yarnpkg.com/lodash.mergewith/-/lodash.mergewith-4.6.2.tgz#617121f89ac55f59047c7aec1ccd6654c6590f55"
 
 lodash.tail@^4.1.1:
   version "4.1.1"
@@ -5811,9 +5811,9 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
-vue-birthday-input@^0.8.5:
-  version "0.8.5"
-  resolved "https://registry.yarnpkg.com/vue-birthday-input/-/vue-birthday-input-0.8.5.tgz#ba4f120c461786b49ef6fb561bf2d4b1f2130f76"
+vue-birthday-input@^0.8.6:
+  version "0.8.6"
+  resolved "https://registry.yarnpkg.com/vue-birthday-input/-/vue-birthday-input-0.8.6.tgz#ec41b8a8e4f36954408e8c430aef09df53eb3052"
   dependencies:
     moment "^2.19.2"
 
