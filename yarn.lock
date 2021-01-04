@@ -265,11 +265,11 @@ axios-mock-adapter@^1.7.1:
   dependencies:
     deep-equal "^1.0.1"
 
-axios@^0.15.3:
-  version "0.15.3"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-0.15.3.tgz#2c9d638b2e191a08ea1d6cc988eadd6ba5bdc053"
+axios@^0.21.1:
+  version "0.21.1"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.1.tgz#22563481962f4d6bde9a76d516ef0e5d3c09b2b8"
   dependencies:
-    follow-redirects "1.0.0"
+    follow-redirects "^1.10.0"
 
 babel-code-frame@^6.11.0, babel-code-frame@^6.26.0:
   version "6.26.0"
@@ -2294,11 +2294,9 @@ flush-write-stream@^1.0.0:
     inherits "^2.0.1"
     readable-stream "^2.0.4"
 
-follow-redirects@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.0.0.tgz#8e34298cbd2e176f254effec75a1c78cc849fd37"
-  dependencies:
-    debug "^2.2.0"
+follow-redirects@^1.10.0:
+  version "1.13.1"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.13.1.tgz#5f69b813376cee4fd0474a3aba835df04ab763b7"
 
 font-awesome@^4.7.0:
   version "4.7.0"
@@ -5811,9 +5809,9 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
-vue-birthday-input@^0.8.5:
-  version "0.8.5"
-  resolved "https://registry.yarnpkg.com/vue-birthday-input/-/vue-birthday-input-0.8.5.tgz#ba4f120c461786b49ef6fb561bf2d4b1f2130f76"
+vue-birthday-input@^0.8.6:
+  version "0.8.6"
+  resolved "https://registry.yarnpkg.com/vue-birthday-input/-/vue-birthday-input-0.8.6.tgz#ec41b8a8e4f36954408e8c430aef09df53eb3052"
   dependencies:
     moment "^2.19.2"
 
