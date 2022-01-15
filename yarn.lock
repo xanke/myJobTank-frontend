@@ -5228,9 +5228,9 @@ shelljs@0.3.x:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/shelljs/-/shelljs-0.3.0.tgz#3596e6307a781544f591f37da618360f31db57b1"
 
-shelljs@^0.7.6:
-  version "0.7.8"
-  resolved "https://registry.yarnpkg.com/shelljs/-/shelljs-0.7.8.tgz#decbcf874b0d1e5fb72e14b164a9683048e9acb3"
+shelljs@^0.8.5:
+  version "0.8.5"
+  resolved "https://registry.yarnpkg.com/shelljs/-/shelljs-0.8.5.tgz#de055408d8361bed66c669d2f000538ced8ee20c"
   dependencies:
     glob "^7.0.0"
     interpret "^1.0.0"
@@ -5811,9 +5811,9 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
-vue-birthday-input@^0.8.5:
-  version "0.8.5"
-  resolved "https://registry.yarnpkg.com/vue-birthday-input/-/vue-birthday-input-0.8.5.tgz#ba4f120c461786b49ef6fb561bf2d4b1f2130f76"
+vue-birthday-input@^0.8.6:
+  version "0.8.6"
+  resolved "https://registry.yarnpkg.com/vue-birthday-input/-/vue-birthday-input-0.8.6.tgz#ec41b8a8e4f36954408e8c430aef09df53eb3052"
   dependencies:
     moment "^2.19.2"
 
