@@ -3776,9 +3776,9 @@ mockjs@^1.0.1-beta3:
   dependencies:
     commander "*"
 
-moment@^2.18.1, moment@^2.19.2:
-  version "2.20.1"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.20.1.tgz#d6eb1a46cbcc14a2b2f9434112c1ff8907f313fd"
+moment@^2.19.2, moment@^2.29.2:
+  version "2.29.2"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.2.tgz#00910c60b20843bcba52d37d58c628b47b1f20e4"
 
 morgan@~1.6.1:
   version "1.6.1"
@@ -5811,9 +5811,9 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
-vue-birthday-input@^0.8.5:
-  version "0.8.5"
-  resolved "https://registry.yarnpkg.com/vue-birthday-input/-/vue-birthday-input-0.8.5.tgz#ba4f120c461786b49ef6fb561bf2d4b1f2130f76"
+vue-birthday-input@^0.8.6:
+  version "0.8.6"
+  resolved "https://registry.yarnpkg.com/vue-birthday-input/-/vue-birthday-input-0.8.6.tgz#ec41b8a8e4f36954408e8c430aef09df53eb3052"
   dependencies:
     moment "^2.19.2"
 
